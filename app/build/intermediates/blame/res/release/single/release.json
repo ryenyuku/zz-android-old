@@ -1,0 +1,426 @@
+[
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout__drawer_filepicker.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/_drawer_filepicker.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_favorite.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_favorite.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_phone_android.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_phone_android.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_no_network_emote04.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/no_network_emote04.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_skip_next_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_skip_next_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_swthome.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/swthome.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_sd_storage.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_sd_storage.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_share.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_share.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_file.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_file.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_color.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_color.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_person.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_person.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_arrow_back_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_arrow_back_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_discord.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_discord.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_music.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/music.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_block.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_block.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_signal_cellular_4_bar.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_signal_cellular_4_bar.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_more_vert.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_more_vert.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_refresh.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_refresh.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_about.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/about.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_pause_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_pause_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_list.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_list.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_no_network_emote03.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/no_network_emote03.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_drive.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_drive.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_launcher_background.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_favorite_border.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_favorite_border.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_delete.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_delete.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_repeat_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_repeat_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-v26_ic_launcher.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_sketchub.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_sketchub.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_updateapp.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/updateapp.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_filepicker.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/filepicker.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_exit_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_exit_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_webtoon.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_webtoon.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_debug.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/debug.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_theme_preview.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/theme_preview.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_signal_wifi_4_bar.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_signal_wifi_4_bar.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_themes_store_list.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/themes_store_list.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_upload.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/upload.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_subdirectory_arrow_right.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_subdirectory_arrow_right.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_custom_snack.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/custom_snack.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_themesstr.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/themesstr.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_message.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_message.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_logout.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_logout.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_themes.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/themes.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_navigate_next.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_navigate_next.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_message.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/message.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_send.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_send.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_graphic_eq.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_graphic_eq.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_daedit.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/daedit.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_comments_layout.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/comments_layout.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_search_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_search_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_report_problem.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_report_problem.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_menu.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_menu.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_main.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/main.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_edit_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_edit_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_no_network_emote01.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/no_network_emote01.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_skip_previous_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_skip_previous_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_info_outline_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_info_outline_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_album_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_album_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_lyrics.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/lyrics.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_pass.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_pass.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_file_copy.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_file_copy.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_add_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_add_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_done_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_done_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_playlist_clickable.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/playlist_clickable.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_disks.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/disks.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_colpick.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/colpick.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_settings.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_settings.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_crop.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/crop.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_streamer.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/streamer.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_daeditlayout.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/daeditlayout.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_image.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_image.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_list_file.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/list_file.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_list.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/list.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_headset.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_headset.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_folder.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_folder.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout__drawer_streamer.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/_drawer_streamer.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_update.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_update.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_repeat_one_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_repeat_one_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_logcat.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/logcat.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_wizard.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/wizard.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_expand_more_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_expand_more_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_profile.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/profile.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_profile.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_profile.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_book.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_book.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_themes_store.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_themes_store.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_unknown_roles.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_unknown_roles.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_no_network_emote02.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/no_network_emote02.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_play_arrow_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_play_arrow_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_custom_dialog.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_settings.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/settings.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_cloud_upload.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_cloud_upload.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_lyrics.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_lyrics.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable_ic_launcher.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable/ic_launcher.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_lyricslist.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/lyricslist.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_download_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_download_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_framelay_background.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/framelay_background.xml"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_no_network_emote05.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/no_network_emote05.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_access_alarm.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_access_alarm.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_shuffle_white.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_shuffle_white.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/raw_partyblob.gif.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/raw/partyblob.gif"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_ic_os_thm.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/ic_os_thm.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_default_image.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/default_image.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/drawable-xhdpi_img_empty.png.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/drawable-xhdpi/img_empty.png"
+    },
+    {
+        "merged": "/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/res/merged/release/layout_chgpic.xml.flat",
+        "source": "/disks/Data/Projects/ZryteZene-Android/app/src/main/res/layout/chgpic.xml"
+    }
+]

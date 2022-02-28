@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "tw.music.streamer",
+  "variantType": "BASE_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "PROCESSED_RES"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 27301,
+        "versionName": "2.7.3.01",
+        "outputFile": "app-debug.apk",
+        "fullName": "debug",
+        "baseName": "debug",
+        "dirName": ""
+      },
+      "path": "resources-debug.ap_",
+      "properties": {
+        "packageId": "tw.music.streamer",
+        "split": "",
+        "minSdkVersion": "21"
+      }
+    }
+  ]
+}

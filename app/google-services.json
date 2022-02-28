@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "620871502475",
+    "firebase_url": "https://teammusic-tw.firebaseio.com",
+    "project_id": "teammusic-tw",
+    "storage_bucket": "teammusic-tw.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620871502475:android:ddcd038b709295fc",
+        "android_client_info": {
+          "package_name": "tw.music.streamer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620871502475-3svbjh4u1jtjr5egru9cql5q79563ud7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfY9sGiNDoyQ97DGeh4hgI_Euj6euBdpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620871502475-3svbjh4u1jtjr5egru9cql5q79563ud7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
