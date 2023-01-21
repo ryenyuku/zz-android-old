@@ -1,4 +1,0 @@
-#Mon Sep 14 14:21:29 WIB 2020
-base.0=/disks/Data/Projects/ZryteZene-Android/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
