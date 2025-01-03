@@ -121,6 +121,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
+import tw.music.streamer.adaptor.ZryteZeneAdaptor;
+
 public class StreamerActivity extends AppCompatActivity {
 
     private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
@@ -312,6 +314,7 @@ public class StreamerActivity extends AppCompatActivity {
     private androidx.viewpager.widget.ViewPager viewPager;
     private android.graphics.drawable.AnimationDrawable rocketAnimation;
     private ProgressDialog coreprog;
+    private ZryteZeneAdaptor zz;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
@@ -445,6 +448,7 @@ public class StreamerActivity extends AppCompatActivity {
         data = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
         Auth = FirebaseAuth.getInstance();
         d = new AlertDialog.Builder(this);
+        zz = new ZryteZeneAdaptor();
 
         image_drawer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -691,6 +695,7 @@ public class StreamerActivity extends AppCompatActivity {
                         }
                     }
                 }
+                zz.requestAction("update-sp","loop");
             }
         });
 
@@ -701,12 +706,12 @@ public class StreamerActivity extends AppCompatActivity {
                     if (data.getString("nightcore", "").equals("1")) {
                         data.edit().putString("nightcore", "0").commit();
                         image_nightcore.setAlpha((float) (0.5d));
-                        tmservice._setNightcore(1.00f);
+                        //tmservice._setNightcore(1.00f);
                     } else {
                         data.edit().putString("nightcore", "1").commit();
                         image_nightcore.setAlpha((float) (1.0d));
                         float _tmpFloat = 1.10f + ((float) Double.parseDouble(data.getString("nightcoreSpeed", "")) * 0.05f);
-                        tmservice._setNightcore(_tmpFloat);
+                        //tmservice._setNightcore(_tmpFloat);
                     }
                 } else {
                     data.edit().putString("nightcore", "0").commit();
@@ -775,18 +780,11 @@ public class StreamerActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar _param1) {
-                if (!tmservice._isMpNull()) {
-                    tmservice._mpPause();
-                    tmservice._removeFocus();
-                }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar _param2) {
-                if (!tmservice._isMpNull()) {
-                    tmservice._mpSeek(seekbar1.getProgress() * 1000);
-                    tmservice._requestFocus();
-                }
+                zz.requestAction("seek", seekbar1.getProgress() * 1000);
             }
         });
 
@@ -4749,12 +4747,6 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 
             return _v;
         }
-    }
-
-    private void tellService(String a, String b) {
-        Intent jof = new Intent(getApplicationContext(), ZryteZenePlay.class);
-        jof.putExtra("action", a);
-        jof.putExtra("req-data", b);
     }
 
     private BroadcastReceiver brr = new BroadcastReceiver() {

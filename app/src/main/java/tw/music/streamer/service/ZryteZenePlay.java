@@ -66,6 +66,9 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
                     playPreviousSong();
                 } else if (act.equals("next-song")) {
                     playNextSong();
+                } else if (act.equals("update-sp")) {
+                    String c = b.getStringData("req-data");
+                    updateSP(c);
                 }
             }
         }
@@ -138,17 +141,9 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
     private void seekSong(Intent a) {
         if (mp==null) return;
         if (mp.isPlaying()) {
-            mp.seekTo(a.getIntExtra("seekpos",0));
+            mp.seekTo(a.getIntExtra("req-data",0));
             tellActivity("request-seek","1");
         }
-    }
-
-    private void playPreviousSong() {
-
-    }
-
-    private void playNextSong() {
-
     }
 
     private void tellActivity(String a, String b) {
@@ -156,6 +151,12 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
         ita.putExtra("update", a);
         ita.putExtra("data", b);
         sendBroadcast(ita);
+    }
+
+    private void updateSP(String a) {
+        if (a.equals("loop")) {
+            lm = sp.getString("fvsAsc", "");
+        }
     }
 
 }
