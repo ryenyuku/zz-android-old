@@ -4,15 +4,22 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.app.Service;
+import android.media.MediaPlayer;
+import android.media.AudioManager;
 import android.content.Intent;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
 
 import androidx.annotation.Nullable;
 
-public class Play extends Service {
+public class Play extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener, {
 
     private BroadcastReceiver br;
+    private MediaPlayer mp;
+    private IntentFilter ief;
+
+    private MediaPlayer.OnPreparedListener onprep;
 
     @Override
     public void onCreate() {
@@ -37,6 +44,7 @@ public class Play extends Service {
     }
 
     private void initializePlayer() {
+        mp = new MediaPlayer();
         br = new BroadcastReceiver() {
             @Override
             public void onReceive(Context a, Intent b) {
@@ -46,35 +54,44 @@ public class Play extends Service {
                 }
             }
         }
-        IntentFilter ief = new IntentFilter("tw.music.streamer.ACTION");
+        ief = new IntentFilter("tw.music.streamer.ACTION");
         registerReceiver(br, ief);
+        applyMediaListener();
     }
 
-    private void _play(final String _key) { //line 2703
-        _CoreProgressLoading(true);
-        tmservice._resetMp();
-        final double _position = currentlyChild.indexOf(_key);
-        tmservice._playSongFromURL(currentlyMap.get((int) _position).get("url").toString());
-        currentlyPlaying = _key;
-        text_title.setText(currentlyMap.get((int) _position).get("name").toString());
-        if (usrname_list.contains(currentlyMap.get((int) _position).get("uid").toString())) {
-            text_artist.setText(profile_map.get(usrname_list.indexOf(currentlyMap.get((int) _position).get("uid").toString())).get("username").toString());
-        } else {
-            text_artist.setText(currentlyMap.get((int) _position).get("uid").toString());
-        }
-        if (adminsList.contains(currentlyMap.get((int) _position).get("uid").toString())) {
-            text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorButton").toString()));
-        } else {
-            text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorPrimaryCardText").toString()));
-        }
-        if (currentlyMap.get((int) _position).containsKey("img")) {
-            image_album.clearColorFilter();
-            Glide.with(getApplicationContext()).load(currentlyMap.get((int) _position).get("img").toString()).centerCrop().into(image_album);
-        } else {
-            image_album.setImageResource(R.drawable.ic_album_white);
-            image_album.setColorFilter(Color.parseColor(theme_map.get(0).get("colorButtonText").toString()), PorterDuff.Mode.MULTIPLY);
-        }
+    @Override
+    public void onPrepared(MediaPlayer a) {
+        //sendDataToActivity(1, "");
     }
 
+    @Override
+    public void onBufferingUpdate(MediaPlayer a, int b) {
+        //sendDataToActivity(2, String.valueOf((long) _percent));
+    }
+
+    private void applyMediaListener() {
+        mp.setOnPreparedListener(this);
+        mp.setOnBufferingUpdateListener(this);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer _unmp) {
+                sendDataToActivity(3, "");
+            }
+        });
+        mp.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer _unmp, int _param1, int _param2) {
+                sendDataToActivity(4, String.format("Error(%s%s)", _param1, _param2));
+                return true;
+            }
+        });
+    }
+
+    private void playSong(String a) {
+        mp = new MediaPlayer();
+        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mp.setDataSource(a);
+        
+        mp.prepareAsync();
+    }
 
 }
