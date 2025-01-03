@@ -13,7 +13,7 @@ import android.content.BroadcastReceiver;
 
 import androidx.annotation.Nullable;
 
-public class Play extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener, {
+public class Play extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 
     private BroadcastReceiver br;
     private MediaPlayer mp;
@@ -51,6 +51,14 @@ public class Play extends Service implements MediaPlayer.OnPreparedListener, Med
                 act = b.getStringExtra("action");
                 if (act.equals("seek")) {
                     seekSong(b);
+                } else if (act.equals("pause")) {
+                    pauseSong();
+                } else if (act.equals("resume")) {
+                    resumeSong();
+                } else if (act.equals("prev-song")) {
+                    playPreviousSong();
+                } else if (act.equals("next-song")) {
+                    playNextSong();
                 }
             }
         }
@@ -69,28 +77,29 @@ public class Play extends Service implements MediaPlayer.OnPreparedListener, Med
         //sendDataToActivity(2, String.valueOf((long) _percent));
     }
 
+    @Override
+    public void onCompletion(MediaPlayer a) {
+        //sendDataToActivity(3, "");
+    }
+
+    @Override
+    public boolean onError(MediaPlayer a, int b, int c) {
+        //sendDataToActivity(4, String.format("Error(%s%s)", b, c));
+        return true;
+    }
+
     private void applyMediaListener() {
         mp.setOnPreparedListener(this);
         mp.setOnBufferingUpdateListener(this);
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer _unmp) {
-                sendDataToActivity(3, "");
-            }
-        });
-        mp.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer _unmp, int _param1, int _param2) {
-                sendDataToActivity(4, String.format("Error(%s%s)", _param1, _param2));
-                return true;
-            }
-        });
+        mp.setOnCompletionListener(this);
+        mp.setOnErrorListener(this);
     }
 
     private void playSong(String a) {
         mp = new MediaPlayer();
         mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mp.setDataSource(a);
-        
+        applyMediaListener();
         mp.prepareAsync();
     }
 
