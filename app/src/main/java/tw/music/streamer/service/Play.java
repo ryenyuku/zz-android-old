@@ -34,6 +34,11 @@ public class Play extends Service implements MediaPlayer.OnPreparedListener, Med
 
     @Override
     public void onDestroy() {
+        unregisterReceiver(br);
+        if (mp!=null) {
+            mp.release();
+            mp = null;
+        }
         super.onDestroy();
     }
 
@@ -101,15 +106,31 @@ public class Play extends Service implements MediaPlayer.OnPreparedListener, Med
         mp.setDataSource(a);
         applyMediaListener();
         mp.prepareAsync();
-        tellActivity("play-song","1");
+        tellActivity("request-play","1");
     }
 
     private void pauseSong() {
-
+        if (mp==null) return;
+        if (mp.isPlaying()) {
+            mp.pause();
+            tellActivity("request-pause","1");
+        }
     }
 
     private void resumeSong() {
+        if (mp==null) return;
+        if (mp.isPlaying()) {
+            mp.resume();
+            tellActivity("request-resume","1");
+        }
+    }
 
+    private void stopSong() {
+        if (mp==null) return;
+        if (mp.isPlaying()) {
+            mp.stop();
+            tellActivity("request-stop","1");
+        }
     }
 
     private void seekSong(Intent a) {
