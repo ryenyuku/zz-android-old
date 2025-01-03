@@ -101,6 +101,36 @@ public class Play extends Service implements MediaPlayer.OnPreparedListener, Med
         mp.setDataSource(a);
         applyMediaListener();
         mp.prepareAsync();
+        tellActivity("play-song","1");
+    }
+
+    private void pauseSong() {
+
+    }
+
+    private void resumeSong() {
+
+    }
+
+    private void seekSong(Intent a) {
+        if (mp==null) return;
+        mp.seekTo(a.getIntExtra("seekpos",0));
+        tellActivity("request-seek","1");
+    }
+
+    private void playPreviousSong() {
+
+    }
+
+    private void playNextSong() {
+
+    }
+
+    private void tellActivity(String a, String b) {
+        ita = new Intent("tw.music.streamer.ACTION_UPDATE");
+        ita.putExtra("update", a);
+        ita.putExtra("data", b);
+        sendBroadcast(ita);
     }
 
 }
