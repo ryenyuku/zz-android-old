@@ -19,7 +19,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
     private MediaPlayer mp;
     private IntentFilter ief;
     private SharedPreferences sp;
-    private String lm, act;
+    private String lm, act, csp;
 
     @Override
     public void onCreate() {
@@ -58,17 +58,24 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
                 act = b.getStringExtra("action");
                 if (act.equals("seek")) {
                     seekSong(b);
+                } else if (act.equals("play")) {
+                    playSong(b);
                 } else if (act.equals("pause")) {
                     pauseSong();
                 } else if (act.equals("resume")) {
                     resumeSong();
+                } else if (act.equals("stop")) {
+                    stopSong();
                 } else if (act.equals("prev-song")) {
                     playPreviousSong();
                 } else if (act.equals("next-song")) {
                     playNextSong();
                 } else if (act.equals("update-sp")) {
-                    String c = b.getStringData("req-data");
-                    updateSP(c);
+                    updateSP(b);
+                } else if (act.equals("restart-song")) {
+                    restartSong();
+                } else if (act.equals("reset")) {
+                    resetMedia();
                 }
             }
         }
@@ -105,20 +112,21 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
         mp.setOnErrorListener(this);
     }
 
-    private void playSong(String a) {
+    private void playSong(Intent a) {
+        csp = a.getStringData("req-data");
         mp = new MediaPlayer();
         mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mp.setDataSource(a);
+        mp.setDataSource(csp);
         applyMediaListener();
         mp.prepareAsync();
-        tellActivity("request-play","1");
+        tellActivity("request-play");
     }
 
     private void pauseSong() {
         if (mp==null) return;
         if (mp.isPlaying()) {
             mp.pause();
-            tellActivity("request-pause","1");
+            tellActivity("request-pause");
         }
     }
 
@@ -126,7 +134,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
         if (mp==null) return;
         if (mp.isPlaying()) {
             mp.resume();
-            tellActivity("request-resume","1");
+            tellActivity("request-resume");
         }
     }
 
@@ -134,7 +142,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
         if (mp==null) return;
         if (mp.isPlaying()) {
             mp.stop();
-            tellActivity("request-stop","1");
+            tellActivity("request-stop");
         }
     }
 
@@ -142,8 +150,27 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
         if (mp==null) return;
         if (mp.isPlaying()) {
             mp.seekTo(a.getIntExtra("req-data",0));
-            tellActivity("request-seek","1");
+            tellActivity("request-seek");
         }
+    }
+
+    private void restartSong() {
+        if (mp==null) return;
+        if (mp.isPlaying()) mp.stop();
+        mp.seekTo(0);
+        mp.start();
+        tellActivity("request-restart"); // tambahin di streameractivity.java
+    }
+
+    private void resetMedia() {
+        mp = new MediaPlayer();
+        tellActivity("request-reset") // tambahin di streameractivity.java
+    }
+
+    private void tellActivity(String a) {
+        ita = new Intent("tw.music.streamer.STATUS_UPDATE");
+        ita.putExtra("update", a);
+        sendBroadcast(ita);
     }
 
     private void tellActivity(String a, String b) {
@@ -153,8 +180,9 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
         sendBroadcast(ita);
     }
 
-    private void updateSP(String a) {
-        if (a.equals("loop")) {
+    private void updateSP(Intent a) {
+        String b = a.getStringData("req-data");
+        if (b.equals("loop")) {
             lm = sp.getString("fvsAsc", "");
         }
     }

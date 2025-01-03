@@ -806,12 +806,12 @@ public class StreamerActivity extends AppCompatActivity {
         image_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View _view) {
-                if (tmservice._isPlaying()) {
+                /*if (tmservice._isPlaying()) {
                     tmservice._mpPause();
                     tmservice._removeFocus();
                 } else {
                     tmservice._requestFocus();
-                }
+                }*/
             }
         });
 
@@ -1621,7 +1621,6 @@ public class StreamerActivity extends AppCompatActivity {
             public void onComplete(Task<AuthResult> _param1) {
                 final boolean _success = _param1.isSuccessful();
                 final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : "";
-
             }
         };
 
@@ -1630,7 +1629,6 @@ public class StreamerActivity extends AppCompatActivity {
             public void onComplete(Task<AuthResult> _param1) {
                 final boolean _success = _param1.isSuccessful();
                 final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : "";
-
             }
         };
 
@@ -1638,7 +1636,6 @@ public class StreamerActivity extends AppCompatActivity {
             @Override
             public void onComplete(Task<Void> _param1) {
                 final boolean _success = _param1.isSuccessful();
-
             }
         };
     }
@@ -2244,13 +2241,13 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
     }
 
     private void _refreshLikes() {
-        if (!tmservice._isMpNull()) {
+        //if (!tmservice._isMpNull()) {
             if (likeChild.contains(currentlyPlaying.concat(FirebaseAuth.getInstance().getCurrentUser().getUid()))) {
                 image_favs.setImageResource(R.drawable.ic_favorite);
             } else {
                 image_favs.setImageResource(R.drawable.ic_favorite_border);
             }
-        }
+        //}
     }
 
     private void _CoreProgressLoading(final boolean _ifShow) {
@@ -2628,9 +2625,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 
     private void _play(final String _key) {
         _CoreProgressLoading(true);
-        tmservice._resetMp();
+        //tmservice._resetMp();
         final double _position = currentlyChild.indexOf(_key);
-        tmservice._playSongFromURL(currentlyMap.get((int) _position).get("url").toString());
+        //tmservice._playSongFromURL(currentlyMap.get((int) _position).get("url").toString());
         currentlyPlaying = _key;
         text_title.setText(currentlyMap.get((int) _position).get("name").toString());
         if (usrname_list.contains(currentlyMap.get((int) _position).get("uid").toString())) {
@@ -2650,6 +2647,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
             image_album.setImageResource(R.drawable.ic_album_white);
             image_album.setColorFilter(Color.parseColor(theme_map.get(0).get("colorButtonText").toString()), PorterDuff.Mode.MULTIPLY);
         }
+        zz.requestAction("play",currentlyMap.get((int) _position).get("url").toString());
     }
 
     private void _NewTapTarget(final View _view, final String _title, final String _msg, final String _bgcolor) {
@@ -2715,14 +2713,14 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         if (data.getString("nightcore", "").equals("1")) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 float _tmpFloat = 1.10f + ((float) Double.parseDouble(data.getString("nightcoreSpeed", "")) * 0.05f);
-                tmservice._setNightcore(_tmpFloat);
+                //tmservice._setNightcore(_tmpFloat);
             } else {
                 data.edit().putString("nightcore", "0").commit();
                 image_nightcore.setAlpha((float) (0.5d));
                 _customSnack("Android Lollipop or lower doesn't support nightcore feature!", 2);
             }
         }
-        tmservice._requestFocus();
+        //tmservice._requestFocus();
         _CoreProgressLoading(false);
         _refreshLikes();
         if (openNum == 0) {
@@ -2748,8 +2746,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         obj.setDuration(500);
         obj.start();
         _customNav(theme_map.get(0).get("colorBackground").toString());
-        tmservice._removeFocus();
-        tmservice._resetMp();
+        //tmservice._removeFocus();
+        //tmservice._resetMp();
+        zz.clear();
         currentlyMap.clear();
         currentlyChild.clear();
     }
@@ -2776,8 +2775,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                 obj.setDuration(500);
                 obj.start();
                 _customNav(theme_map.get(0).get("colorBackground").toString());
-                tmservice._removeFocus();
-                tmservice._resetMp();
+                //tmservice._removeFocus();
+                //tmservice._resetMp();
+                zz.clear();
                 currentlyMap.clear();
                 currentlyChild.clear();
             }
@@ -2790,8 +2790,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                 }
             } else {
                 if (data.getString("fvsAsc", "").equals("2")) {
-                    tmservice._mpSeek(0);
-                    tmservice._mpStart();
+                    //tmservice._mpSeek(0);
+                    //tmservice._mpStart();
+                    zz.requestAction("restart-song");
                     upload_map = new HashMap<>();
                     upload_map = currentlyMap.get((int) _position);
                     upload_map.put("view", String.valueOf((long) (Double.parseDouble(upload_map.get("view").toString()) + 1)));
@@ -2805,9 +2806,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 
     private void _updateTime() {
         try {
-            if (tmservice._isPlaying()) {
+            if (zz.isPlaying()) {
                 image_play.setImageResource(R.drawable.ic_pause_white);
-                seekbar1.setProgress(tmservice._getCurrentDuration() / 1000);
+                seekbar1.setProgress(zz.getCurrentDuration() / 1000);
             } else {
                 image_play.setImageResource(R.drawable.ic_play_arrow_white);
             }
@@ -2827,23 +2828,24 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         obj.setDuration(500);
         obj.start();
         _customNav(theme_map.get(0).get("colorBackground").toString());
-        tmservice._removeFocus();
-        tmservice._resetMp();
+        //tmservice._removeFocus();
+        //tmservice._resetMp();
+        zz.requestAction("reset");
         currentlyMap.clear();
         currentlyChild.clear();
     }
 
     private void _bindSvc() {
-        if (tmservice == null) {
+        /*if (tmservice == null) {
             Intent svcintent = new Intent(StreamerActivity.this, ZryteZeneService.class);
             bindService(svcintent, serviceConnection, Context.BIND_AUTO_CREATE);
-        }
+        }*/
     }
 
     private void _unbindSvc() {
-        if (tmservice != null) {
+        /*if (tmservice != null) {
             unbindService(serviceConnection);
-        }
+        }*/
     }
 
     @Deprecated
