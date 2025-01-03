@@ -149,8 +149,9 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
     private void seekSong(Intent a) {
         if (mp==null) return;
         if (mp.isPlaying()) {
-            mp.seekTo(a.getIntExtra("req-data",0));
-            tellActivity("request-seek");
+            int b = a.getIntExtra("req-data",0);
+            mp.seekTo(b);
+            tellActivity("request-seek", b);
         }
     }
 
@@ -159,12 +160,12 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
         if (mp.isPlaying()) mp.stop();
         mp.seekTo(0);
         mp.start();
-        tellActivity("request-restart"); // tambahin di streameractivity.java
+        tellActivity("request-restart");
     }
 
     private void resetMedia() {
         mp = new MediaPlayer();
-        tellActivity("request-reset") // tambahin di streameractivity.java
+        tellActivity("request-reset");
     }
 
     private void tellActivity(String a) {
@@ -174,6 +175,13 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
     }
 
     private void tellActivity(String a, String b) {
+        ita = new Intent("tw.music.streamer.STATUS_UPDATE");
+        ita.putExtra("update", a);
+        ita.putExtra("data", b);
+        sendBroadcast(ita);
+    }
+
+    private void tellActivity(String a, int b) {
         ita = new Intent("tw.music.streamer.STATUS_UPDATE");
         ita.putExtra("update", a);
         ita.putExtra("data", b);

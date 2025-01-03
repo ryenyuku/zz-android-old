@@ -449,6 +449,10 @@ public class StreamerActivity extends AppCompatActivity {
         Auth = FirebaseAuth.getInstance();
         d = new AlertDialog.Builder(this);
         zz = new ZryteZeneAdaptor();
+        IntentFilter iaos = new IntentFilter("tw.music.streamer.STATUS_UPDATE");
+        registerReceiver(brr, iaos);
+        Intent siop = new Intent(getApplicationContext(), tw.music.streamer.service.ZryteZenePlay.class);
+        startService(siop);
 
         image_drawer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -4635,7 +4639,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                 linear_base.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View _view) {
-                        if (tmservice != null) {
+                        //if (tmservice != null) {
                             currentlyMap.clear();
                             currentlyChild.clear();
                             for (int _repeat244 = 0; _repeat244 < upload_list.size(); _repeat244++) {
@@ -4649,7 +4653,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                                 currentlyChild.add(childkey.get(currentlyChild.size()));
                             }
                             _play(currentlyChild.get(_position));
-                        }
+                        //}
                     }
                 });
                 linear_base.setOnLongClickListener(new View.OnLongClickListener() {
@@ -4757,26 +4761,41 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
             String c = b.getStringExtra("update");
             switch (c) {
                 case "on-prepared":
+                    zz.setRunning(true);
                     break;
                 case "on-bufferupdate":
+                    int apdf = b.getIntExtra("data");
+                    zz.setBufferingUpdate(apdf);
                     break;
                 case "on-completion":
+                    zz.setPlaying(false);
                     break;
                 case "on-error":
+                    String apdf = b.getExtra("data");
+                    zz.addError(apdf)
+                    zz.setPlaying(false);
                     break;
                 case "request-play":
+                    zz.setPlaying(true);
                     break;
                 case "request-pause":
+                    zz.setPlaying(false);
                     break;
                 case "request-resume":
+                    zz.setPlaying(true);
                     break;
                 case "request-stop":
+                    zz.setPlaying(false);
                     break;
                 case "request-seek":
+                    int apdf = b.getIntExtra("data");
+                    zz.setCurrentDuration(apdf);
                     break;
-                case "request-prevsong":
+                case "request-restart":
+                    zz.setPlaying(true);
                     break;
-                case "request-nextsong":
+                case "request-reset":
+                    zz.setPlaying(false);
                     break;
             }
         }

@@ -7,12 +7,14 @@ import tw.music.streamer.service.ZryteZenePlay;
 public class ZryteZeneAdaptor {
 
     private boolean isr, isp;
-    private int cd;
+    private int cd, bu;
+    private ArrayList<String> e;
 
     public void ZryteZeneAdaptor() {
         isr = false;
         isp = false;
         cd = 0;
+        e = new ArrayList<>();
     }
 
     public void setRunning(boolean a) {
@@ -39,8 +41,20 @@ public class ZryteZeneAdaptor {
         return cd;
     }
 
+    public void setBufferingUpdate(int a) {
+        bu = a;
+    }
+
+    public int getBufferingUpdate() {
+        return bu;
+    }
+
     public void clear() {
         requestAction("stop","-");
+    }
+
+    public void addError(String a) {
+        e.add(a);
     }
 
     public void requestAction(String a) {
