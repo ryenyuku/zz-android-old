@@ -1,25 +1,25 @@
 package tw.music.streamer.service;
 
-import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
 import android.app.Service;
+import android.app.Activity;
 import android.media.MediaPlayer;
 import android.media.AudioManager;
 import android.content.Intent;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
+import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
 
-public class Play extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
+public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 
     private BroadcastReceiver br;
     private MediaPlayer mp;
     private IntentFilter ief;
-
-    private MediaPlayer.OnPreparedListener onprep;
+    private SharedPreferences sp;
+    private String lm, act;
 
     @Override
     public void onCreate() {
@@ -49,6 +49,8 @@ public class Play extends Service implements MediaPlayer.OnPreparedListener, Med
     }
 
     private void initializePlayer() {
+        sp = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
+        lm = sp.getString("fvsAsc", "");
         mp = new MediaPlayer();
         br = new BroadcastReceiver() {
             @Override
@@ -74,22 +76,22 @@ public class Play extends Service implements MediaPlayer.OnPreparedListener, Med
 
     @Override
     public void onPrepared(MediaPlayer a) {
-        //sendDataToActivity(1, "");
+        tellActivity("on-prepared","1");
     }
 
     @Override
     public void onBufferingUpdate(MediaPlayer a, int b) {
-        //sendDataToActivity(2, String.valueOf((long) _percent));
+        tellActivity("on-bufferupdate",b);
     }
 
     @Override
     public void onCompletion(MediaPlayer a) {
-        //sendDataToActivity(3, "");
+        tellActivity("on-completion","1");
     }
 
     @Override
     public boolean onError(MediaPlayer a, int b, int c) {
-        //sendDataToActivity(4, String.format("Error(%s%s)", b, c));
+        tellActivity("on-error", String.format("Error(%s%s)", b, c));
         return true;
     }
 
@@ -135,8 +137,10 @@ public class Play extends Service implements MediaPlayer.OnPreparedListener, Med
 
     private void seekSong(Intent a) {
         if (mp==null) return;
-        mp.seekTo(a.getIntExtra("seekpos",0));
-        tellActivity("request-seek","1");
+        if (mp.isPlaying()) {
+            mp.seekTo(a.getIntExtra("seekpos",0));
+            tellActivity("request-seek","1");
+        }
     }
 
     private void playPreviousSong() {
@@ -148,7 +152,7 @@ public class Play extends Service implements MediaPlayer.OnPreparedListener, Med
     }
 
     private void tellActivity(String a, String b) {
-        ita = new Intent("tw.music.streamer.ACTION_UPDATE");
+        ita = new Intent("tw.music.streamer.STATUS_UPDATE");
         ita.putExtra("update", a);
         ita.putExtra("data", b);
         sendBroadcast(ita);

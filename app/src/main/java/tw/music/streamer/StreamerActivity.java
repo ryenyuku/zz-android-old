@@ -312,78 +312,6 @@ public class StreamerActivity extends AppCompatActivity {
     private androidx.viewpager.widget.ViewPager viewPager;
     private android.graphics.drawable.AnimationDrawable rocketAnimation;
     private ProgressDialog coreprog;
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            tmservice = (ZryteZeneServiceBinder) iBinder;
-            tmservice.setContext(getApplicationContext());
-
-            dataHandlerReceiverZero = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _updateTime();
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverZero, 0);
-
-            dataHandlerReceiverOne = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _mpPreparedListener();
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverOne, 1);
-
-            dataHandlerReceiverTwo = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _mpBufferingUpdate(msg.what);
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverTwo, 2);
-
-            dataHandlerReceiverThree = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _mpCompletionListener();
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverThree, 3);
-
-            dataHandlerReceiverFour = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _mpErrorListener(tmservice._tmpFour);
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverFour, 4);
-
-            dataHandlerReceiverFive = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _handleMpError(tmservice._tmpFive);
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverFive, 5);
-
-            tmservice.initializeTM();
-            fb_likes.addChildEventListener(_fb_likes_child_listener);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-
-        }
-    };
-
-    {
-    }
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
@@ -4822,5 +4750,43 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
             return _v;
         }
     }
+
+    private void tellService(String a, String b) {
+        Intent jof = new Intent(getApplicationContext(), ZryteZenePlay.class);
+        jof.putExtra("action", a);
+        jof.putExtra("req-data", b);
+    }
+
+    private BroadcastReceiver brr = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context a, Intent b) {
+            String c = b.getStringExtra("update");
+            switch (c) {
+                case "on-prepared":
+                    break;
+                case "on-bufferupdate":
+                    break;
+                case "on-completion":
+                    break;
+                case "on-error":
+                    break;
+                case "request-play":
+                    break;
+                case "request-pause":
+                    break;
+                case "request-resume":
+                    break;
+                case "request-stop":
+                    break;
+                case "request-seek":
+                    break;
+                case "request-prevsong":
+                    break;
+                case "request-nextsong":
+                    break;
+            }
+        }
+    };
+
 
 }
