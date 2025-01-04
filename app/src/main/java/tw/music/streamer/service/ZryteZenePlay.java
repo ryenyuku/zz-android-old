@@ -20,6 +20,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
     private IntentFilter ief;
     private SharedPreferences sp;
     private String lm, act, csp;
+    private Intent ita;
 
     @Override
     public void onCreate() {
