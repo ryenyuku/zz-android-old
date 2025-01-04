@@ -63,20 +63,20 @@ public class ZryteZeneAdaptor {
     }
 
     public void requestAction(String a) {
-        Intent jof = new Intent(getApplicationContext(), ZryteZenePlay.class);
+        Intent jof = new Intent(ctx, ZryteZenePlay.class);
         jof.putExtra("action", a);
         ctx.sendBroadcast(jof);
     }
 
     public void requestAction(String a, int b) {
-        Intent jof = new Intent(getApplicationContext(), ZryteZenePlay.class);
+        Intent jof = new Intent(ctx, ZryteZenePlay.class);
         jof.putExtra("action", a);
         jof.putExtra("req-data", b);
         ctx.sendBroadcast(jof);
     }
 
     public void requestAction(String a, String b) {
-        Intent jof = new Intent(getApplicationContext(), ZryteZenePlay.class);
+        Intent jof = new Intent(ctx, ZryteZenePlay.class);
         jof.putExtra("action", a);
         jof.putExtra("req-data", b);
         ctx.sendBroadcast(jof);
