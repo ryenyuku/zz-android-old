@@ -4758,7 +4758,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
     private BroadcastReceiver brr = new BroadcastReceiver() {
         @Override
         public void onReceive(Context a, Intent b) {
-            if (zz==null || !zz.isRunning) return;
+            if (zz==null) return;
             String c = b.getStringExtra("update");
             switch (c) {
                 case "on-prepared":
@@ -4773,7 +4773,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                     break;
                 case "on-error":
                     String apdf = b.getExtra("data");
-                    zz.addError(apdf)
+                    zz.addError(apdf);
                     zz.setPlaying(false);
                     break;
                 case "request-play":
