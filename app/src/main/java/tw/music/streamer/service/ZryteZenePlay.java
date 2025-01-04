@@ -113,14 +113,13 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
         csp = a.getStringExtra("req-data");
         mp = new MediaPlayer();
         mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        applyMediaListener();
         try {
             mp.setDataSource(csp);
-        } catch (Exception e) {
-            tellActivity("on-error", e.toString());
-        } finally {
-            applyMediaListener();
             mp.prepareAsync();
             tellActivity("request-play");
+        } catch (Exception e) {
+            tellActivity("on-error", e.toString());
         }
     }
 
