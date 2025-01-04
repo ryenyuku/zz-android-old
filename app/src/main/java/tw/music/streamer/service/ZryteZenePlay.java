@@ -67,10 +67,6 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
                     resumeSong();
                 } else if (act.equals("stop")) {
                     stopSong();
-                } else if (act.equals("prev-song")) {
-                    playPreviousSong();
-                } else if (act.equals("next-song")) {
-                    playNextSong();
                 } else if (act.equals("update-sp")) {
                     updateSP(b);
                 } else if (act.equals("restart-song")) {
