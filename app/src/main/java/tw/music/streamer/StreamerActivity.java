@@ -4758,6 +4758,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
     private BroadcastReceiver brr = new BroadcastReceiver() {
         @Override
         public void onReceive(Context a, Intent b) {
+            if (zz==null || !zz.isRunning) return;
             String c = b.getStringExtra("update");
             switch (c) {
                 case "on-prepared":
