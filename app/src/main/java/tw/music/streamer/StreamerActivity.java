@@ -448,7 +448,7 @@ public class StreamerActivity extends AppCompatActivity {
         data = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
         Auth = FirebaseAuth.getInstance();
         d = new AlertDialog.Builder(this);
-        zz = new ZryteZeneAdaptor();
+        zz = new ZryteZeneAdaptor(this);
         IntentFilter iaos = new IntentFilter("tw.music.streamer.STATUS_UPDATE");
         registerReceiver(brr, iaos);
         Intent siop = new Intent(getApplicationContext(), tw.music.streamer.service.ZryteZenePlay.class);

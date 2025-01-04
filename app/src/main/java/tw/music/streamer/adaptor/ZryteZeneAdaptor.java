@@ -1,6 +1,9 @@
 package tw.music.streamer.adaptor;
 
 import android.content.Intent;
+import android.content.Context;
+
+import java.util.ArrayList;
 
 import tw.music.streamer.service.ZryteZenePlay;
 
@@ -9,12 +12,14 @@ public class ZryteZeneAdaptor {
     private boolean isr, isp;
     private int cd, bu;
     private ArrayList<String> e;
+    private Context ctx;
 
-    public void ZryteZeneAdaptor() {
+    public ZryteZeneAdaptor(Context a) {
         isr = false;
         isp = false;
         cd = 0;
         e = new ArrayList<>();
+        ctx = a;
     }
 
     public void setRunning(boolean a) {
@@ -60,20 +65,20 @@ public class ZryteZeneAdaptor {
     public void requestAction(String a) {
         Intent jof = new Intent(getApplicationContext(), ZryteZenePlay.class);
         jof.putExtra("action", a);
-        sendBroadcast(jof);
+        ctx.sendBroadcast(jof);
     }
 
     public void requestAction(String a, int b) {
         Intent jof = new Intent(getApplicationContext(), ZryteZenePlay.class);
         jof.putExtra("action", a);
         jof.putExtra("req-data", b);
-        sendBroadcast(jof);
+        ctx.sendBroadcast(jof);
     }
 
     public void requestAction(String a, String b) {
         Intent jof = new Intent(getApplicationContext(), ZryteZenePlay.class);
         jof.putExtra("action", a);
         jof.putExtra("req-data", b);
-        sendBroadcast(jof);
+        ctx.sendBroadcast(jof);
     }
 }
