@@ -79,7 +79,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
                     resetMedia();
                 }
             }
-        }
+        };
         ief = new IntentFilter("tw.music.streamer.ACTION");
         registerReceiver(br, ief);
         applyMediaListener();
@@ -114,7 +114,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
     }
 
     private void playSong(Intent a) {
-        csp = a.getStringData("req-data");
+        csp = a.getStringExtra("req-data");
         mp = new MediaPlayer();
         mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mp.setDataSource(csp);
@@ -134,7 +134,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
     private void resumeSong() {
         if (mp==null) return;
         if (mp.isPlaying()) {
-            mp.resume();
+            mp.start();
             tellActivity("request-resume");
         }
     }
@@ -190,7 +190,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
     }
 
     private void updateSP(Intent a) {
-        String b = a.getStringData("req-data");
+        String b = a.getStringExtra("req-data");
         if (b.equals("loop")) {
             lm = sp.getString("fvsAsc", "");
         }
