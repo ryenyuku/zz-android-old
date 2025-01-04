@@ -7,8 +7,8 @@ android {
 	
 	defaultConfig {
 		applicationId "tw.music.streamer"
-		minSdkVersion 21
-		targetSdkVersion 30
+		minSdkVersion 27
+		targetSdkVersion 34
 		renderscriptTargetApi 30
 		renderscriptSupportModeEnabled true
 		versionCode 27301

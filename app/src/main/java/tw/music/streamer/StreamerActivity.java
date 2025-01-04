@@ -16,6 +16,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.IntentFilter;
+import android.content.BroadcastReceiver;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -4765,15 +4767,15 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                     zz.setRunning(true);
                     break;
                 case "on-bufferupdate":
-                    int apdf = b.getIntExtra("data");
+                    int apdf = b.getIntExtra("data",0);
                     zz.setBufferingUpdate(apdf);
                     break;
                 case "on-completion":
                     zz.setPlaying(false);
                     break;
                 case "on-error":
-                    String apdf = b.getExtra("data");
-                    zz.addError(apdf);
+                    String apdfg = b.getStringExtra("data");
+                    zz.addError(apdfg);
                     zz.setPlaying(false);
                     break;
                 case "request-play":
@@ -4789,8 +4791,8 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                     zz.setPlaying(false);
                     break;
                 case "request-seek":
-                    int apdf = b.getIntExtra("data");
-                    zz.setCurrentDuration(apdf);
+                    int apdfw = b.getIntExtra("data",0);
+                    zz.setCurrentDuration(apdfw);
                     break;
                 case "request-restart":
                     zz.setPlaying(true);
