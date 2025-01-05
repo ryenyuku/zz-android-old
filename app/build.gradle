@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-	compileSdkVersion 30
+	compileSdkVersion 33
 	buildToolsVersion "30.0.2"
 	
 	defaultConfig {
 		applicationId "tw.music.streamer"
-		minSdkVersion 21
-		targetSdkVersion 30
+		minSdkVersion 27
+		targetSdkVersion 33
 		renderscriptTargetApi 30
 		renderscriptSupportModeEnabled true
 		versionCode 27301

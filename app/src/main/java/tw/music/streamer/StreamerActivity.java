@@ -16,6 +16,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.IntentFilter;
+import android.content.BroadcastReceiver;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -120,6 +122,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
+
+import tw.music.streamer.adaptor.ZryteZeneAdaptor;
+import tw.music.streamer.service.ZryteZenePlay;
 
 public class StreamerActivity extends AppCompatActivity {
 
@@ -301,7 +306,6 @@ public class StreamerActivity extends AppCompatActivity {
     private double _t;
     private ArrayAdapter<String> Listview2Adapter;
     private GridView listview2;
-    private ZryteZeneServiceBinder tmservice;
     private Handler dataHandlerReceiverZero;
     private Handler dataHandlerReceiverOne;
     private Handler dataHandlerReceiverTwo;
@@ -312,78 +316,7 @@ public class StreamerActivity extends AppCompatActivity {
     private androidx.viewpager.widget.ViewPager viewPager;
     private android.graphics.drawable.AnimationDrawable rocketAnimation;
     private ProgressDialog coreprog;
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            tmservice = (ZryteZeneServiceBinder) iBinder;
-            tmservice.setContext(getApplicationContext());
-
-            dataHandlerReceiverZero = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _updateTime();
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverZero, 0);
-
-            dataHandlerReceiverOne = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _mpPreparedListener();
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverOne, 1);
-
-            dataHandlerReceiverTwo = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _mpBufferingUpdate(msg.what);
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverTwo, 2);
-
-            dataHandlerReceiverThree = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _mpCompletionListener();
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverThree, 3);
-
-            dataHandlerReceiverFour = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _mpErrorListener(tmservice._tmpFour);
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverFour, 4);
-
-            dataHandlerReceiverFive = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    _handleMpError(tmservice._tmpFive);
-                }
-            };
-
-            tmservice.setDataHandler(dataHandlerReceiverFive, 5);
-
-            tmservice.initializeTM();
-            fb_likes.addChildEventListener(_fb_likes_child_listener);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-
-        }
-    };
-
-    {
-    }
+    private ZryteZeneAdaptor zz;
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
@@ -517,6 +450,13 @@ public class StreamerActivity extends AppCompatActivity {
         data = getSharedPreferences("teamdata", Activity.MODE_PRIVATE);
         Auth = FirebaseAuth.getInstance();
         d = new AlertDialog.Builder(this);
+        zz = new ZryteZeneAdaptor(this);
+        Intent siop = new Intent(getApplicationContext(), ZryteZenePlay.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(siop);
+        } else {
+            startService(siop);
+        }
 
         image_drawer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -763,6 +703,7 @@ public class StreamerActivity extends AppCompatActivity {
                         }
                     }
                 }
+                zz.requestAction("update-sp","loop");
             }
         });
 
@@ -773,12 +714,12 @@ public class StreamerActivity extends AppCompatActivity {
                     if (data.getString("nightcore", "").equals("1")) {
                         data.edit().putString("nightcore", "0").commit();
                         image_nightcore.setAlpha((float) (0.5d));
-                        tmservice._setNightcore(1.00f);
+                        //tmservice._setNightcore(1.00f);
                     } else {
                         data.edit().putString("nightcore", "1").commit();
                         image_nightcore.setAlpha((float) (1.0d));
                         float _tmpFloat = 1.10f + ((float) Double.parseDouble(data.getString("nightcoreSpeed", "")) * 0.05f);
-                        tmservice._setNightcore(_tmpFloat);
+                        //tmservice._setNightcore(_tmpFloat);
                     }
                 } else {
                     data.edit().putString("nightcore", "0").commit();
@@ -847,18 +788,11 @@ public class StreamerActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar _param1) {
-                if (!tmservice._isMpNull()) {
-                    tmservice._mpPause();
-                    tmservice._removeFocus();
-                }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar _param2) {
-                if (!tmservice._isMpNull()) {
-                    tmservice._mpSeek(seekbar1.getProgress() * 1000);
-                    tmservice._requestFocus();
-                }
+                zz.requestAction("seek", seekbar1.getProgress() * 1000);
             }
         });
 
@@ -880,12 +814,12 @@ public class StreamerActivity extends AppCompatActivity {
         image_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View _view) {
-                if (tmservice._isPlaying()) {
+                /*if (tmservice._isPlaying()) {
                     tmservice._mpPause();
                     tmservice._removeFocus();
                 } else {
                     tmservice._requestFocus();
-                }
+                }*/
             }
         });
 
@@ -1046,8 +980,8 @@ public class StreamerActivity extends AppCompatActivity {
                     obj.setDuration(500);
                     obj.start();
                     _customNav(theme_map.get(0).get("colorBackground").toString());
-                    tmservice._removeFocus();
-                    tmservice._resetMp();
+                    //tmservice._removeFocus();
+                    //tmservice._resetMp();
                     currentlyMap.clear();
                     currentlyChild.clear();
                 }
@@ -1057,12 +991,12 @@ public class StreamerActivity extends AppCompatActivity {
                     upload_list.remove(childkey.indexOf(_childKey));
                     childkey.remove(childkey.indexOf(_childKey));
                 }
-                if (!tmservice._isMpNull() && currentlyChild != null) {
-                    if (currentlyChild.contains(_childKey)) {
-                        currentlyMap.remove(currentlyChild.indexOf(_childKey));
-                        currentlyChild.remove(currentlyChild.indexOf(_childKey));
-                    }
-                }
+                //if (!tmservice._isMpNull() && currentlyChild != null) {
+                    //if (currentlyChild.contains(_childKey)) {
+                        //currentlyMap.remove(currentlyChild.indexOf(_childKey));
+                        //currentlyChild.remove(currentlyChild.indexOf(_childKey));
+                    //}
+                //}
                 int _index = listview1.getFirstVisiblePosition();
                 View _view = listview1.getChildAt(0);
                 int _top = (_view == null) ? 0 : _view.getTop();
@@ -1695,7 +1629,6 @@ public class StreamerActivity extends AppCompatActivity {
             public void onComplete(Task<AuthResult> _param1) {
                 final boolean _success = _param1.isSuccessful();
                 final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : "";
-
             }
         };
 
@@ -1704,7 +1637,6 @@ public class StreamerActivity extends AppCompatActivity {
             public void onComplete(Task<AuthResult> _param1) {
                 final boolean _success = _param1.isSuccessful();
                 final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : "";
-
             }
         };
 
@@ -1712,7 +1644,6 @@ public class StreamerActivity extends AppCompatActivity {
             @Override
             public void onComplete(Task<Void> _param1) {
                 final boolean _success = _param1.isSuccessful();
-
             }
         };
     }
@@ -1789,8 +1720,8 @@ public class StreamerActivity extends AppCompatActivity {
                             obj.setDuration(500);
                             obj.start();
                             _customNav(theme_map.get(0).get("colorBackground").toString());
-                            tmservice._removeFocus();
-                            tmservice._resetMp();
+                            //tmservice._removeFocus();
+                            //tmservice._resetMp();
                             currentlyMap.clear();
                             currentlyChild.clear();
                         }
@@ -1956,10 +1887,27 @@ public class StreamerActivity extends AppCompatActivity {
             }
         }
         _firebase_storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/tm-testfile?alt=media&token=ec852b8b-438c-457a-887d-b289968971ec").getFile(new File(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tm-testfile"))).addOnSuccessListener(_check_quota_download_success_listener).addOnFailureListener(_check_quota_failure_listener).addOnProgressListener(_check_quota_download_progress_listener);
+        IntentFilter filr = new IntentFilter(ZryteZenePlay.ACTION_UPDATE);
+		registerReceiver(listenerReceiver, filr);
+        zz.requestAction("request-media");
 		/*
 Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 */
     }
+
+    private BroadcastReceiver listenerReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent != null && intent.getAction() != null) {
+				if (intent.getAction().equals(ZryteZenePlay.ACTION_UPDATE)) {
+					String m = intent.getStringExtra("update");
+					if (m.equals("on-prepared")) {
+                        _CoreProgressLoading(false);
+                    }
+				}
+			}
+		}
+	};
 
     @Override
     protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
@@ -2004,11 +1952,11 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                     _setMenu(tabsPos);
                     _abandonFocus();
                 } else {
-                    if (!tmservice._isMpNull()) {
-                        moveTaskToBack(true);
-                    } else {
-                        finish();
-                    }
+                    //if (!tmservice._isMpNull()) {
+                        //moveTaskToBack(true);
+                    //} else {
+                        //finish();
+                    //}
                 }
             }
         }
@@ -2028,7 +1976,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
             image_user.clearColorFilter();
             _drawer_image_user.clearColorFilter();
         }
-        if (tmservice != null) {
+        /*if (tmservice != null) {
             if (!currentlyPlaying.equals("") && !tmservice._isMpNull()) {
                 if (currentlyMap.get(currentlyChild.indexOf(currentlyPlaying)).containsKey("img")) {
                     image_album.clearColorFilter();
@@ -2039,26 +1987,23 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                     text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorPrimaryCardText").toString()));
                 }
             }
-        }
+        }*/
         ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
     }
 
     @Override
@@ -2217,8 +2162,8 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         text_zene.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
         text_playlist.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
         edittext_search.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        x_tab.setSelectedTabIndicatorColor(Color.parseColor(theme_map.get(0).get("colorPrimary").toString()));
-        x_tab.setTabTextColors(Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()), Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()));
+        //x_tab.setSelectedTabIndicatorColor(Color.parseColor(theme_map.get(0).get("colorPrimary").toString()));
+        //x_tab.setTabTextColors(Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()), Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()));
 
         {
             ViewGroup _vg = (ViewGroup) x_tab.getChildAt(0);
@@ -2318,13 +2263,13 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
     }
 
     private void _refreshLikes() {
-        if (!tmservice._isMpNull()) {
+        //if (!tmservice._isMpNull()) {
             if (likeChild.contains(currentlyPlaying.concat(FirebaseAuth.getInstance().getCurrentUser().getUid()))) {
                 image_favs.setImageResource(R.drawable.ic_favorite);
             } else {
                 image_favs.setImageResource(R.drawable.ic_favorite_border);
             }
-        }
+        //}
     }
 
     private void _CoreProgressLoading(final boolean _ifShow) {
@@ -2702,9 +2647,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 
     private void _play(final String _key) {
         _CoreProgressLoading(true);
-        tmservice._resetMp();
+        //tmservice._resetMp();
         final double _position = currentlyChild.indexOf(_key);
-        tmservice._playSongFromURL(currentlyMap.get((int) _position).get("url").toString());
+        //tmservice._playSongFromURL(currentlyMap.get((int) _position).get("url").toString());
         currentlyPlaying = _key;
         text_title.setText(currentlyMap.get((int) _position).get("name").toString());
         if (usrname_list.contains(currentlyMap.get((int) _position).get("uid").toString())) {
@@ -2724,6 +2669,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
             image_album.setImageResource(R.drawable.ic_album_white);
             image_album.setColorFilter(Color.parseColor(theme_map.get(0).get("colorButtonText").toString()), PorterDuff.Mode.MULTIPLY);
         }
+        zz.requestAction("play", currentlyMap.get((int) _position).get("url").toString());
     }
 
     private void _NewTapTarget(final View _view, final String _title, final String _msg, final String _bgcolor) {
@@ -2789,14 +2735,14 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         if (data.getString("nightcore", "").equals("1")) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 float _tmpFloat = 1.10f + ((float) Double.parseDouble(data.getString("nightcoreSpeed", "")) * 0.05f);
-                tmservice._setNightcore(_tmpFloat);
+                //tmservice._setNightcore(_tmpFloat);
             } else {
                 data.edit().putString("nightcore", "0").commit();
                 image_nightcore.setAlpha((float) (0.5d));
                 _customSnack("Android Lollipop or lower doesn't support nightcore feature!", 2);
             }
         }
-        tmservice._requestFocus();
+        //tmservice._requestFocus();
         _CoreProgressLoading(false);
         _refreshLikes();
         if (openNum == 0) {
@@ -2806,8 +2752,8 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         upload_map = currentlyMap.get((int) _position);
         upload_map.put("view", String.valueOf((long) (Double.parseDouble(upload_map.get("view").toString()) + 1)));
         upload_text.child(currentlyPlaying).updateChildren(upload_map);
-        text_duration.setText(new DecimalFormat("00").format(tmservice._getSongDuration() / 60000).concat(":".concat(new DecimalFormat("00").format((tmservice._getSongDuration() / 1000) % 60))));
-        seekbar1.setMax(tmservice._getSongDuration() / 1000);
+        //text_duration.setText(new DecimalFormat("00").format(tmservice._getSongDuration() / 60000).concat(":".concat(new DecimalFormat("00").format((tmservice._getSongDuration() / 1000) % 60))));
+        //seekbar1.setMax(tmservice._getSongDuration() / 1000);
     }
 
     private void _mpErrorListener(final String _errorMsg) {
@@ -2822,15 +2768,16 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         obj.setDuration(500);
         obj.start();
         _customNav(theme_map.get(0).get("colorBackground").toString());
-        tmservice._removeFocus();
-        tmservice._resetMp();
+        //tmservice._removeFocus();
+        //tmservice._resetMp();
+        zz.clear();
         currentlyMap.clear();
         currentlyChild.clear();
     }
 
     private void _mpBufferingUpdate(final double _percent) {
         try {
-            seekbar1.setSecondaryProgress(((int) _percent * tmservice._getSongDuration()) / 100000);
+            //seekbar1.setSecondaryProgress(((int) _percent * tmservice._getSongDuration()) / 100000);
         } catch (Exception _e) {
         }
     }
@@ -2850,8 +2797,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                 obj.setDuration(500);
                 obj.start();
                 _customNav(theme_map.get(0).get("colorBackground").toString());
-                tmservice._removeFocus();
-                tmservice._resetMp();
+                //tmservice._removeFocus();
+                //tmservice._resetMp();
+                zz.clear();
                 currentlyMap.clear();
                 currentlyChild.clear();
             }
@@ -2864,8 +2812,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                 }
             } else {
                 if (data.getString("fvsAsc", "").equals("2")) {
-                    tmservice._mpSeek(0);
-                    tmservice._mpStart();
+                    //tmservice._mpSeek(0);
+                    //tmservice._mpStart();
+                    zz.requestAction("restart-song");
                     upload_map = new HashMap<>();
                     upload_map = currentlyMap.get((int) _position);
                     upload_map.put("view", String.valueOf((long) (Double.parseDouble(upload_map.get("view").toString()) + 1)));
@@ -2879,9 +2828,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 
     private void _updateTime() {
         try {
-            if (tmservice._isPlaying()) {
+            if (zz.isPlaying()) {
                 image_play.setImageResource(R.drawable.ic_pause_white);
-                seekbar1.setProgress(tmservice._getCurrentDuration() / 1000);
+                seekbar1.setProgress(zz.getCurrentDuration() / 1000);
             } else {
                 image_play.setImageResource(R.drawable.ic_play_arrow_white);
             }
@@ -2901,23 +2850,24 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         obj.setDuration(500);
         obj.start();
         _customNav(theme_map.get(0).get("colorBackground").toString());
-        tmservice._removeFocus();
-        tmservice._resetMp();
+        //tmservice._removeFocus();
+        //tmservice._resetMp();
+        zz.requestAction("reset");
         currentlyMap.clear();
         currentlyChild.clear();
     }
 
     private void _bindSvc() {
-        if (tmservice == null) {
+        /*if (tmservice == null) {
             Intent svcintent = new Intent(StreamerActivity.this, ZryteZeneService.class);
             bindService(svcintent, serviceConnection, Context.BIND_AUTO_CREATE);
-        }
+        }*/
     }
 
     private void _unbindSvc() {
-        if (tmservice != null) {
+        /*if (tmservice != null) {
             unbindService(serviceConnection);
-        }
+        }*/
     }
 
     @Deprecated
@@ -4707,7 +4657,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                 linear_base.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View _view) {
-                        if (tmservice != null) {
+                        //if (tmservice != null) {
                             currentlyMap.clear();
                             currentlyChild.clear();
                             for (int _repeat244 = 0; _repeat244 < upload_list.size(); _repeat244++) {
@@ -4721,7 +4671,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                                 currentlyChild.add(childkey.get(currentlyChild.size()));
                             }
                             _play(currentlyChild.get(_position));
-                        }
+                        //}
                     }
                 });
                 linear_base.setOnLongClickListener(new View.OnLongClickListener() {
@@ -4822,5 +4772,4 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
             return _v;
         }
     }
-
 }

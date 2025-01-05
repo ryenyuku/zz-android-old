@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".SketchApplication"
@@ -14,21 +16,22 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:windowSoftInputMode="stateHidden">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data
                     android:host="zrytezene.xyz"
                     android:scheme="http" />
@@ -39,95 +42,115 @@
                     android:host="openapp"
                     android:scheme="zrytezene" />
             </intent-filter>
+
         </activity>
+
         <activity
             android:name=".AboutActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".UploadActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".DebugActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".ThemesActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".ProfileActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".LogcatActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".ChgpicActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".ThemesstrActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".CropActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".MessageActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".StreamerActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".SwthomeActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.FullScreen"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".FilepickerActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".UpdateappActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".WizardActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".DaeditActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".SettingsActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".LyricsActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
 
         <service
-            android:name=".ZryteZeneService"
-            android:enabled="true"
-            android:exported="false"
+            android:name="tw.music.streamer.service.ZryteZenePlay"
+            android:foregroundServiceType="mediaPlayback"
             android:icon="@drawable/ic_launcher"
-            android:label="ZryteZene Audio Service" />
+            android:label="ZryteZene Background Service"
+            android:exported="true"/>
+
     </application>
 </manifest>
