@@ -10,11 +10,13 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener {
 
+    public static final String ACTION_BROADCAST = "tw.music.streamer.ACTION";
     private BroadcastReceiver br;
     private MediaPlayer mp;
     private IntentFilter ief;
@@ -123,10 +125,13 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
         mp = new MediaPlayer();
         mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
         applyMediaListener();
+        Log.d("ZryteZenePlay","Playing song: " + csp);
         try {
             mp.setDataSource(csp);
             mp.prepareAsync();
+            mp.start();
             tellActivity("request-play");
+            Log.d("ZryteZenePlay","song started...");
         } catch (Exception e) {
             tellActivity("on-error", e.toString());
         }
