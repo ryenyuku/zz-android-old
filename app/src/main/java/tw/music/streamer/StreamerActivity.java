@@ -2162,8 +2162,8 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         text_zene.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
         text_playlist.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
         edittext_search.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        x_tab.setSelectedTabIndicatorColor(Color.parseColor(theme_map.get(0).get("colorPrimary").toString()));
-        x_tab.setTabTextColors(Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()), Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()));
+        //x_tab.setSelectedTabIndicatorColor(Color.parseColor(theme_map.get(0).get("colorPrimary").toString()));
+        //x_tab.setTabTextColors(Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()), Color.parseColor(theme_map.get(0).get("colorBackgroundText").toString()));
 
         {
             ViewGroup _vg = (ViewGroup) x_tab.getChildAt(0);
