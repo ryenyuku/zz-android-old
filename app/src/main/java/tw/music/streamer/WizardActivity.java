@@ -611,14 +611,40 @@ public class WizardActivity extends AppCompatActivity {
 
 
     private void _grantPermission() {
-        if (androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED || androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED) {
-            if (Build.VERSION.SDK_INT < 33) {
-                androidx.core.app.ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1001);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if(checkSelfPermission(Manifest.permision.POST_NOTIFICATION) != PackageManager.PERMISSION_GRANTED) {
+                showMessage("Please allow the notification settings");
+                Intent opd = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+                opd.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+                startActivity(opd);
             } else {
-                _nextSetup();
+                if (androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED || androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED) {
+                    if (Build.VERSION.SDK_INT < 33) {
+                        androidx.core.app.ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1001);
+                    } else {
+                        _nextSetup();
+                    }
+                } else {
+                    _nextSetup();
+                }
             }
         } else {
-            _nextSetup();
+            if (NotificationManagerCompat.from(WizardActivity.this).areNotificationsEnabled()){
+                if (androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED || androidx.core.content.ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_DENIED) {
+                    if (Build.VERSION.SDK_INT < 33) {
+                        androidx.core.app.ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1001);
+                    } else {
+                        _nextSetup();
+                    }
+                } else {
+                    _nextSetup();
+                }
+            } else {
+                showMessage("Please allow the notification settings");
+                Intent fql = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                fql.setData(Uri.parse("package:" + getPackageName()));
+                startActivity(fql);
+            }
         }
     }
 

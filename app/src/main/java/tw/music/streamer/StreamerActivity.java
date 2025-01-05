@@ -124,6 +124,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import tw.music.streamer.adaptor.ZryteZeneAdaptor;
+import tw.music.streamer.service.ZryteZenePlay;
 
 public class StreamerActivity extends AppCompatActivity {
 
