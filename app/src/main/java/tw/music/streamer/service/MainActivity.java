@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		super.onResume();
 		IntentFilter filter = new IntentFilter(ZryteZenePlay.ACTION_UPDATE);
 		registerReceiver(listenerReceiver, filter);
 	}

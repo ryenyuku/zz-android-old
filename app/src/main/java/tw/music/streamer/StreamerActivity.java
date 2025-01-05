@@ -452,14 +452,12 @@ public class StreamerActivity extends AppCompatActivity {
         Auth = FirebaseAuth.getInstance();
         d = new AlertDialog.Builder(this);
         zz = new ZryteZeneAdaptor(this);
-        IntentFilter iaos = new IntentFilter("tw.music.streamer.STATUS_UPDATE");
-        registerReceiver(brr, iaos);
-        Intent siop = new Intent(getApplicationContext(), tw.music.streamer.service.ZryteZenePlay.class);
-        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //startForegroundService(siop);
-        //} else {
+        Intent siop = new Intent(getApplicationContext(), ZryteZenePlay.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(siop);
+        } else {
             startService(siop);
-        //}
+        }
 
         image_drawer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1890,10 +1888,27 @@ public class StreamerActivity extends AppCompatActivity {
             }
         }
         _firebase_storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/teammusic-tw.appspot.com/o/tm-testfile?alt=media&token=ec852b8b-438c-457a-887d-b289968971ec").getFile(new File(FileUtil.getPackageDataDir(getApplicationContext()).concat("/tm-testfile"))).addOnSuccessListener(_check_quota_download_success_listener).addOnFailureListener(_check_quota_failure_listener).addOnProgressListener(_check_quota_download_progress_listener);
+        IntentFilter filr = new IntentFilter(ZryteZenePlay.ACTION_UPDATE);
+		registerReceiver(listenerReceiver, filr);
+        zz.requestAction("request-media");
 		/*
 Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 */
     }
+
+    private BroadcastReceiver listenerReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent != null && intent.getAction() != null) {
+				if (intent.getAction().equals(ZryteZenePlay.ACTION_UPDATE)) {
+					String m = intent.getStringExtra("update");
+					if (m.equals("on-prepared")) {
+                        _CoreProgressLoading(false);
+                    }
+				}
+			}
+		}
+	};
 
     @Override
     protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
@@ -1980,19 +1995,16 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
     }
 
     @Override
@@ -2658,7 +2670,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
             image_album.setImageResource(R.drawable.ic_album_white);
             image_album.setColorFilter(Color.parseColor(theme_map.get(0).get("colorButtonText").toString()), PorterDuff.Mode.MULTIPLY);
         }
-        zz.requestAction("play",currentlyMap.get((int) _position).get("url").toString());
+        zz.requestAction("play", currentlyMap.get((int) _position).get("url").toString());
     }
 
     private void _NewTapTarget(final View _view, final String _title, final String _msg, final String _bgcolor) {

@@ -84,7 +84,7 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 		br = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context a, Intent b) {
-				onReceived(a,b);
+				if (b != null) onReceived(a,b);
 			}
 		};
 		ief = new IntentFilter(ACTION_BROADCAST);
@@ -125,6 +125,8 @@ public class ZryteZenePlay extends Service implements MediaPlayer.OnPreparedList
 	}
 	
 	private void onReceived(Context a, Intent b) {
+		if (b.getAction() == null) return;
+		if (!b.getAction().equals(ACTION_BROADCAST)) return;
 		if (!b.hasExtra("action")) return;
 		act = b.getStringExtra("action");
 		if (act.equals("seek")) {
