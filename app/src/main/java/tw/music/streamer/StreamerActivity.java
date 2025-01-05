@@ -306,7 +306,6 @@ public class StreamerActivity extends AppCompatActivity {
     private double _t;
     private ArrayAdapter<String> Listview2Adapter;
     private GridView listview2;
-    private ZryteZeneServiceBinder tmservice;
     private Handler dataHandlerReceiverZero;
     private Handler dataHandlerReceiverOne;
     private Handler dataHandlerReceiverTwo;
@@ -981,8 +980,8 @@ public class StreamerActivity extends AppCompatActivity {
                     obj.setDuration(500);
                     obj.start();
                     _customNav(theme_map.get(0).get("colorBackground").toString());
-                    tmservice._removeFocus();
-                    tmservice._resetMp();
+                    //tmservice._removeFocus();
+                    //tmservice._resetMp();
                     currentlyMap.clear();
                     currentlyChild.clear();
                 }
@@ -992,12 +991,12 @@ public class StreamerActivity extends AppCompatActivity {
                     upload_list.remove(childkey.indexOf(_childKey));
                     childkey.remove(childkey.indexOf(_childKey));
                 }
-                if (!tmservice._isMpNull() && currentlyChild != null) {
-                    if (currentlyChild.contains(_childKey)) {
-                        currentlyMap.remove(currentlyChild.indexOf(_childKey));
-                        currentlyChild.remove(currentlyChild.indexOf(_childKey));
-                    }
-                }
+                //if (!tmservice._isMpNull() && currentlyChild != null) {
+                    //if (currentlyChild.contains(_childKey)) {
+                        //currentlyMap.remove(currentlyChild.indexOf(_childKey));
+                        //currentlyChild.remove(currentlyChild.indexOf(_childKey));
+                    //}
+                //}
                 int _index = listview1.getFirstVisiblePosition();
                 View _view = listview1.getChildAt(0);
                 int _top = (_view == null) ? 0 : _view.getTop();
@@ -1721,8 +1720,8 @@ public class StreamerActivity extends AppCompatActivity {
                             obj.setDuration(500);
                             obj.start();
                             _customNav(theme_map.get(0).get("colorBackground").toString());
-                            tmservice._removeFocus();
-                            tmservice._resetMp();
+                            //tmservice._removeFocus();
+                            //tmservice._resetMp();
                             currentlyMap.clear();
                             currentlyChild.clear();
                         }
@@ -1953,11 +1952,11 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                     _setMenu(tabsPos);
                     _abandonFocus();
                 } else {
-                    if (!tmservice._isMpNull()) {
-                        moveTaskToBack(true);
-                    } else {
-                        finish();
-                    }
+                    //if (!tmservice._isMpNull()) {
+                        //moveTaskToBack(true);
+                    //} else {
+                        //finish();
+                    //}
                 }
             }
         }
@@ -1977,7 +1976,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
             image_user.clearColorFilter();
             _drawer_image_user.clearColorFilter();
         }
-        if (tmservice != null) {
+        /*if (tmservice != null) {
             if (!currentlyPlaying.equals("") && !tmservice._isMpNull()) {
                 if (currentlyMap.get(currentlyChild.indexOf(currentlyPlaying)).containsKey("img")) {
                     image_album.clearColorFilter();
@@ -1988,7 +1987,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
                     text_artist.setTextColor(Color.parseColor(theme_map.get(0).get("colorPrimaryCardText").toString()));
                 }
             }
-        }
+        }*/
         ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
     }
 
@@ -2753,8 +2752,8 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
         upload_map = currentlyMap.get((int) _position);
         upload_map.put("view", String.valueOf((long) (Double.parseDouble(upload_map.get("view").toString()) + 1)));
         upload_text.child(currentlyPlaying).updateChildren(upload_map);
-        text_duration.setText(new DecimalFormat("00").format(tmservice._getSongDuration() / 60000).concat(":".concat(new DecimalFormat("00").format((tmservice._getSongDuration() / 1000) % 60))));
-        seekbar1.setMax(tmservice._getSongDuration() / 1000);
+        //text_duration.setText(new DecimalFormat("00").format(tmservice._getSongDuration() / 60000).concat(":".concat(new DecimalFormat("00").format((tmservice._getSongDuration() / 1000) % 60))));
+        //seekbar1.setMax(tmservice._getSongDuration() / 1000);
     }
 
     private void _mpErrorListener(final String _errorMsg) {
@@ -2778,7 +2777,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
 
     private void _mpBufferingUpdate(final double _percent) {
         try {
-            seekbar1.setSecondaryProgress(((int) _percent * tmservice._getSongDuration()) / 100000);
+            //seekbar1.setSecondaryProgress(((int) _percent * tmservice._getSongDuration()) / 100000);
         } catch (Exception _e) {
         }
     }
@@ -4773,53 +4772,4 @@ Glide.with(getApplicationContext()).load(Uri.parse("c")).into(image_album);
             return _v;
         }
     }
-
-    private BroadcastReceiver brr = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context a, Intent b) {
-            if (zz==null) return;
-            String c = b.getStringExtra("update");
-            switch (c) {
-                case "on-prepared":
-                    zz.setRunning(true);
-                    break;
-                case "on-bufferupdate":
-                    int apdf = b.getIntExtra("data",0);
-                    zz.setBufferingUpdate(apdf);
-                    break;
-                case "on-completion":
-                    zz.setPlaying(false);
-                    break;
-                case "on-error":
-                    String apdfg = b.getStringExtra("data");
-                    zz.addError(apdfg);
-                    zz.setPlaying(false);
-                    break;
-                case "request-play":
-                    zz.setPlaying(true);
-                    break;
-                case "request-pause":
-                    zz.setPlaying(false);
-                    break;
-                case "request-resume":
-                    zz.setPlaying(true);
-                    break;
-                case "request-stop":
-                    zz.setPlaying(false);
-                    break;
-                case "request-seek":
-                    int apdfw = b.getIntExtra("data",0);
-                    zz.setCurrentDuration(apdfw);
-                    break;
-                case "request-restart":
-                    zz.setPlaying(true);
-                    break;
-                case "request-reset":
-                    zz.setPlaying(false);
-                    break;
-            }
-        }
-    };
-
-
 }

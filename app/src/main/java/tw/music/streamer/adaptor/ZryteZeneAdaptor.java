@@ -5,6 +5,8 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
+import tw.music.streamer.service.ZryteZenePlay;
+
 public class ZryteZeneAdaptor {
 
     private boolean isr, isp;

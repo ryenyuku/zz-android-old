@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,10 +35,10 @@ import android.widget.Toast;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.content.IntentFilter;
-import android.content.BroadcastReceiver;
+import android.provider.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -617,7 +618,7 @@ public class WizardActivity extends AppCompatActivity {
 
     private void _grantPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if(checkSelfPermission(Manifest.permision.POST_NOTIFICATION) != PackageManager.PERMISSION_GRANTED) {
+            if(checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 showMessage("Please allow the notification settings");
                 Intent opd = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
                 opd.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
