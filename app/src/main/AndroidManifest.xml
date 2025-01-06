@@ -146,7 +146,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <service
-            android:name="tw.music.streamer.service.ZryteZenePlay"
+            android:name=".service.ZryteZenePlay"
             android:foregroundServiceType="mediaPlayback"
             android:icon="@drawable/ic_launcher"
             android:label="ZryteZene Background Service"

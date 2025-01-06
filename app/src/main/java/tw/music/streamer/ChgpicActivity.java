@@ -33,10 +33,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -58,7 +60,6 @@ public class ChgpicActivity extends AppCompatActivity {
 
     private ArrayList<HashMap<String, Object>> theme_map = new ArrayList<>();
 
-    private LinearLayout linear1;
     private LinearLayout linear2;
     private LinearLayout linear3;
     private ImageView imageview2;
@@ -87,7 +88,6 @@ public class ChgpicActivity extends AppCompatActivity {
 
     private void initialize(Bundle _savedInstanceState) {
 
-        linear1 = findViewById(R.id.linear1);
         linear2 = findViewById(R.id.linear2);
         linear3 = findViewById(R.id.linear3);
         imageview2 = findViewById(R.id.imageview2);
@@ -201,14 +201,11 @@ public class ChgpicActivity extends AppCompatActivity {
             w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             w.setStatusBarColor(Color.parseColor("#000000"));
         }
-        _loadTheme();
         _customNav("#000000");
         if (!getIntent().getStringExtra("uid").equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
             imageview3.setVisibility(View.GONE);
         }
         linear2.setVisibility(View.GONE);
-        textview1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
     }
 
     @Override
@@ -253,21 +250,8 @@ public class ChgpicActivity extends AppCompatActivity {
     }
 
     private void _customNav(final String _color) {
-        //Code From StackOverFlow.com And Converted By TeamWorks DEV
-        if (Build.VERSION.SDK_INT >= 21) {
-            Window w = this.getWindow();
-            w.setNavigationBarColor(Color.parseColor(_color));
-        }
-		/*
-Glide.with(getApplicationContext()).load(Uri.parse("lol")).into(imageview2);
-*/
-    }
-
-    private void _loadTheme() {
-        theme_map = new Gson().fromJson(data.getString("themesjson", ""), new TypeToken<ArrayList<HashMap<String, Object>>>() {
-        }.getType());
-        _circleRipple(theme_map.get(0).get("colorRipple").toString(), imageview2);
-        _circleRipple(theme_map.get(0).get("colorRipple").toString(), imageview3);
+        Window w = this.getWindow();
+        w.setNavigationBarColor(Color.parseColor(_color));
     }
 
     private void _circleRipple(final String _color, final View _v) {
@@ -280,9 +264,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("lol")).into(imageview2);
         // Create the Snackbar
         ViewGroup containerLayout = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
 
-        com.google.android.material.snackbar.Snackbar snackbar = com.google.android.material.snackbar.Snackbar.make(containerLayout, "", com.google.android.material.snackbar.Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(containerLayout, "", Snackbar.LENGTH_LONG);
         // Get the Snackbar's layout view
-        com.google.android.material.snackbar.Snackbar.SnackbarLayout layout = (com.google.android.material.snackbar.Snackbar.SnackbarLayout) snackbar.getView();
+        Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
         // Inflate our custom view
         View snackview = getLayoutInflater().inflate(R.layout.custom_snack, null);
         // Configure the view
@@ -304,7 +288,6 @@ Glide.with(getApplicationContext()).load(Uri.parse("lol")).into(imageview2);
         TextView text = snackview.findViewById(R.id.textview);
         text.setText(_txt);
         text.setTextColor(Color.WHITE);
-        text.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
         layout.setPadding(0, 0, 0, 0);
         // Add the view to the Snackbar's layout
         layout.addView(snackview, 0);
@@ -521,7 +504,7 @@ Glide.with(getApplicationContext()).load(Uri.parse("lol")).into(imageview2);
         }
     }
 
-    public static class GestureImageView extends ImageView {
+    public static class GestureImageView extends AppCompatImageView {
         public static final String GLOBAL_NS = "http://schemas.android.com/apk/res/android";
         public static final String LOCAL_NS = "http://schemas.polites.com/android";
         private final java.util.concurrent.Semaphore drawLock = new java.util.concurrent.Semaphore(0);

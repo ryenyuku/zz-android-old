@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -33,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -43,7 +43,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<HashMap<String, Object>> profile_map = new ArrayList<>();
     private ArrayList<HashMap<String, Object>> theme_map = new ArrayList<>();
-    private ArrayList<HashMap<String, Object>> tmpMap = new ArrayList<>();
     private ArrayList<HashMap<String, Object>> bansMap = new ArrayList<>();
 
     private LinearLayout linear1;
@@ -74,18 +72,12 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout linear4;
     private ImageView imageview1;
     private TextView textview11;
-    private TextView textview5;
-    private LinearLayout linear5;
     private Button button1;
-    private LinearLayout linear3;
     private ImageView image_user;
     private EditText einput_name;
     private TextView textview7;
     private TextView textview8;
     private TextView textview9;
-    private TextView textview10;
-    private TextView textview1;
-    private TextView textview2;
     private TextView textview6;
     private TextView textview3;
     private ImageView imageview2;
@@ -94,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences data;
     private DatabaseReference update_db = _firebase.getReference("update/version");
     private ChildEventListener _update_db_child_listener;
-    private Intent intent = new Intent();
     private AlertDialog.Builder d;
     private DatabaseReference profile = _firebase.getReference("profile/text");
     private ChildEventListener _profile_child_listener;
@@ -136,18 +127,12 @@ public class MainActivity extends AppCompatActivity {
         linear4 = findViewById(R.id.linear4);
         imageview1 = findViewById(R.id.imageview1);
         textview11 = findViewById(R.id.textview11);
-        textview5 = findViewById(R.id.textview5);
-        linear5 = findViewById(R.id.linear5);
         button1 = findViewById(R.id.button1);
-        linear3 = findViewById(R.id.linear3);
         image_user = findViewById(R.id.image_user);
         einput_name = findViewById(R.id.einput_name);
         textview7 = findViewById(R.id.textview7);
         textview8 = findViewById(R.id.textview8);
         textview9 = findViewById(R.id.textview9);
-        textview10 = findViewById(R.id.textview10);
-        textview1 = findViewById(R.id.textview1);
-        textview2 = findViewById(R.id.textview2);
         textview6 = findViewById(R.id.textview6);
         textview3 = findViewById(R.id.textview3);
         imageview2 = findViewById(R.id.imageview2);
@@ -157,15 +142,6 @@ public class MainActivity extends AppCompatActivity {
         Auth = FirebaseAuth.getInstance();
         internetchecker = new RequestNetwork(this);
         rn = new RequestNetwork(this);
-
-        imageview1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View _view) {
-                intent.setData(Uri.parse("https://zrytezene.xyz"));
-                intent.setAction(Intent.ACTION_VIEW);
-                startActivity(intent);
-            }
-        });
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -646,19 +622,6 @@ public class MainActivity extends AppCompatActivity {
         linear7.setVisibility(View.GONE);
         textview11.setVisibility(View.GONE);
         image_user.setColorFilter(0xFF2196F3, PorterDuff.Mode.MULTIPLY);
-        textview1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf"), 0);
-        textview3.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf"), 0);
-        textview4.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview5.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview6.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview7.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview8.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview9.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview10.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview11.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        einput_name.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        button1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
         _shape(SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), "#2196F3", "#FFFFFF", 0, button1);
         lineartm.setTranslationY(SketchwareUtil.getDip(getApplicationContext(), -75));
         if (data.getString("fvsAsc", "").equals("")) {
@@ -666,70 +629,6 @@ public class MainActivity extends AppCompatActivity {
         }
         if (data.getString("nightcore", "").equals("") || Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             data.edit().putString("nightcore", "0").commit();
-        }
-        if (data.getString("griddata", "").equals("")) {
-            {
-                HashMap<String, Object> _item = new HashMap<>();
-                _item.put("themesname", "$default_1$");
-                theme_map.add(_item);
-            }
-
-            theme_map.get(0).put("themesjson", "[{\"colorPrimary\":\"#2196F3\",\"colorPrimaryDark\":\"#1769AA\",\"colorBackgroundText\":\"#000000\",\"colorBackground\":\"#FFFFFF\",\"colorButton\":\"#F50057\",\"shadow\":\"1\",\"colorHint\":\"#A8A8A8\",\"colorRipple\":\"#40000000\",\"colorPrimaryCardImage\":\"#000000\",\"version\":\"2\",\"colorPrimaryText\":\"#FFFFFF\",\"colorPrimaryImage\":\"#FFFFFF\",\"colorBackgroundImage\":\"#2196F3\",\"colorBackgroundCardText\":\"#000000\",\"statusbarIcon\":\"1\",\"colorBackgroundCard\":\"#FFFFFF\",\"colorButtonText\":\"#FFFFFF\",\"colorPrimaryCardText\":\"#000000\",\"colorPrimaryCard\":\"#FFFFFF\",\"colorBackgroundCardImage\":\"#000000\"}]");
-            theme_map.get(0).put("themesinfo", "The default style of TeamMusic");
-            theme_map.get(0).put("themesauthor", "TeamWorks DEV");
-            theme_map.get(0).put("os-thm-version", "2");
-            {
-                HashMap<String, Object> _item = new HashMap<>();
-                _item.put("themesname", "$default_2$");
-                theme_map.add(_item);
-            }
-
-            theme_map.get(1).put("themesjson", "[{\"colorPrimary\":\"#2196F3\",\"colorPrimaryDark\":\"#252525\",\"colorBackgroundText\":\"#FFFFFF\",\"colorBackground\":\"#252525\",\"colorButton\":\"#F50057\",\"shadow\":\"1\",\"colorHint\":\"#808080\",\"colorRipple\":\"#40FFFFFF\",\"colorPrimaryCardImage\":\"#98A0A8\",\"version\":\"2\",\"colorPrimaryText\":\"#FFFFFF\",\"colorPrimaryImage\":\"#FFFFFF\",\"colorBackgroundImage\":\"#2196F3\",\"colorBackgroundCardText\":\"#98A0A8\",\"statusbarIcon\":\"1\",\"colorBackgroundCard\":\"#404040\",\"colorButtonText\":\"#FFFFFF\",\"colorPrimaryCardText\":\"#98A0A8\",\"colorPrimaryCard\":\"#404040\",\"colorBackgroundCardImage\":\"#98A0A8\"}]");
-            theme_map.get(1).put("themesinfo", "A Material dark theme for TeamMusic.");
-            theme_map.get(1).put("themesauthor", "Axhyre");
-            theme_map.get(1).put("os-thm-version", "2");
-            data.edit().putString("griddata", new Gson().toJson(theme_map)).commit();
-        } else {
-            theme_map = new Gson().fromJson(data.getString("griddata", ""), new TypeToken<ArrayList<HashMap<String, Object>>>() {
-            }.getType());
-            tmpMapVar = new HashMap<>();
-            tmpMapVar = theme_map.get(0);
-            if (!new Gson().toJson(tmpMapVar).equals("{\"themesjson\":\"[{\\\"colorPrimary\\\":\\\"#2196F3\\\",\\\"colorPrimaryDark\\\":\\\"#1769AA\\\",\\\"colorBackgroundText\\\":\\\"#000000\\\",\\\"colorBackground\\\":\\\"#FFFFFF\\\",\\\"colorButton\\\":\\\"#F50057\\\",\\\"shadow\\\":\\\"1\\\",\\\"colorHint\\\":\\\"#A8A8A8\\\",\\\"colorRipple\\\":\\\"#40000000\\\",\\\"colorPrimaryCardImage\\\":\\\"#000000\\\",\\\"version\\\":\\\"2\\\",\\\"colorPrimaryText\\\":\\\"#FFFFFF\\\",\\\"colorPrimaryImage\\\":\\\"#FFFFFF\\\",\\\"colorBackgroundImage\\\":\\\"#2196F3\\\",\\\"colorBackgroundCardText\\\":\\\"#000000\\\",\\\"statusbarIcon\\\":\\\"1\\\",\\\"colorBackgroundCard\\\":\\\"#FFFFFF\\\",\\\"colorButtonText\\\":\\\"#FFFFFF\\\",\\\"colorPrimaryCardText\\\":\\\"#000000\\\",\\\"colorPrimaryCard\\\":\\\"#FFFFFF\\\",\\\"colorBackgroundCardImage\\\":\\\"#000000\\\"}]\",\"themesauthor\":\"TeamWorks DEV\",\"themesname\":\"$default_1$\",\"themesinfo\":\"The default style of TeamMusic\",\"os-thm-version\":\"2\"}")) {
-                theme_map.get(0).put("themesname", "$default_1$");
-                theme_map.get(0).put("themesjson", "[{\"colorPrimary\":\"#2196F3\",\"colorPrimaryDark\":\"#1769AA\",\"colorBackgroundText\":\"#000000\",\"colorBackground\":\"#FFFFFF\",\"colorButton\":\"#F50057\",\"shadow\":\"1\",\"colorHint\":\"#A8A8A8\",\"colorRipple\":\"#40000000\",\"colorPrimaryCardImage\":\"#000000\",\"version\":\"2\",\"colorPrimaryText\":\"#FFFFFF\",\"colorPrimaryImage\":\"#FFFFFF\",\"colorBackgroundImage\":\"#2196F3\",\"colorBackgroundCardText\":\"#000000\",\"statusbarIcon\":\"1\",\"colorBackgroundCard\":\"#FFFFFF\",\"colorButtonText\":\"#FFFFFF\",\"colorPrimaryCardText\":\"#000000\",\"colorPrimaryCard\":\"#FFFFFF\",\"colorBackgroundCardImage\":\"#000000\"}]");
-                theme_map.get(0).put("themesinfo", "The default style of TeamMusic");
-                theme_map.get(0).put("themesauthor", "TeamWorks DEV");
-                theme_map.get(0).put("os-thm-version", "2");
-                data.edit().putString("griddata", new Gson().toJson(theme_map)).commit();
-            }
-            if (theme_map.size() > 1) {
-                tmpMapVar = theme_map.get(1);
-                if (!new Gson().toJson(tmpMapVar).equals("{\"themesjson\":\"[{\\\"colorPrimary\\\":\\\"#2196F3\\\",\\\"colorPrimaryDark\\\":\\\"#252525\\\",\\\"colorBackgroundText\\\":\\\"#FFFFFF\\\",\\\"colorBackground\\\":\\\"#252525\\\",\\\"colorButton\\\":\\\"#F50057\\\",\\\"shadow\\\":\\\"1\\\",\\\"colorHint\\\":\\\"#808080\\\",\\\"colorRipple\\\":\\\"#40FFFFFF\\\",\\\"colorPrimaryCardImage\\\":\\\"#98A0A8\\\",\\\"version\\\":\\\"2\\\",\\\"colorPrimaryText\\\":\\\"#FFFFFF\\\",\\\"colorPrimaryImage\\\":\\\"#FFFFFF\\\",\\\"colorBackgroundImage\\\":\\\"#2196F3\\\",\\\"colorBackgroundCardText\\\":\\\"#98A0A8\\\",\\\"statusbarIcon\\\":\\\"1\\\",\\\"colorBackgroundCard\\\":\\\"#404040\\\",\\\"colorButtonText\\\":\\\"#FFFFFF\\\",\\\"colorPrimaryCardText\\\":\\\"#98A0A8\\\",\\\"colorPrimaryCard\\\":\\\"#404040\\\",\\\"colorBackgroundCardImage\\\":\\\"#98A0A8\\\"}]\",\"themesauthor\":\"Axhyre\",\"themesname\":\"$default_2$\",\"themesinfo\":\"A Material dark theme for TeamMusic.\",\"os-thm-version\":\"2\"}")) {
-                    {
-                        HashMap<String, Object> _item = new HashMap<>();
-                        _item.put("themesname", "$default_2$");
-                        theme_map.add(1, _item);
-                    }
-
-                    theme_map.get(1).put("themesjson", "[{\"colorPrimary\":\"#2196F3\",\"colorPrimaryDark\":\"#252525\",\"colorBackgroundText\":\"#FFFFFF\",\"colorBackground\":\"#252525\",\"colorButton\":\"#F50057\",\"shadow\":\"1\",\"colorHint\":\"#808080\",\"colorRipple\":\"#40FFFFFF\",\"colorPrimaryCardImage\":\"#98A0A8\",\"version\":\"2\",\"colorPrimaryText\":\"#FFFFFF\",\"colorPrimaryImage\":\"#FFFFFF\",\"colorBackgroundImage\":\"#2196F3\",\"colorBackgroundCardText\":\"#98A0A8\",\"statusbarIcon\":\"1\",\"colorBackgroundCard\":\"#404040\",\"colorButtonText\":\"#FFFFFF\",\"colorPrimaryCardText\":\"#98A0A8\",\"colorPrimaryCard\":\"#404040\",\"colorBackgroundCardImage\":\"#98A0A8\"}]");
-                    theme_map.get(1).put("themesinfo", "A Material dark theme for TeamMusic.");
-                    theme_map.get(1).put("themesauthor", "Axhyre");
-                    theme_map.get(1).put("os-thm-version", "2");
-                    data.edit().putString("griddata", new Gson().toJson(theme_map)).commit();
-                }
-            } else {
-                {
-                    HashMap<String, Object> _item = new HashMap<>();
-                    _item.put("themesname", "$default_2$");
-                    theme_map.add(_item);
-                }
-
-                theme_map.get(1).put("themesjson", "[{\"colorPrimary\":\"#2196F3\",\"colorPrimaryDark\":\"#252525\",\"colorBackgroundText\":\"#FFFFFF\",\"colorBackground\":\"#252525\",\"colorButton\":\"#F50057\",\"shadow\":\"1\",\"colorHint\":\"#808080\",\"colorRipple\":\"#40FFFFFF\",\"colorPrimaryCardImage\":\"#98A0A8\",\"version\":\"2\",\"colorPrimaryText\":\"#FFFFFF\",\"colorPrimaryImage\":\"#FFFFFF\",\"colorBackgroundImage\":\"#2196F3\",\"colorBackgroundCardText\":\"#98A0A8\",\"statusbarIcon\":\"1\",\"colorBackgroundCard\":\"#404040\",\"colorButtonText\":\"#FFFFFF\",\"colorPrimaryCardText\":\"#98A0A8\",\"colorPrimaryCard\":\"#404040\",\"colorBackgroundCardImage\":\"#98A0A8\"}]");
-                theme_map.get(1).put("themesinfo", "A Material dark theme for TeamMusic.");
-                theme_map.get(1).put("themesauthor", "Axhyre");
-                theme_map.get(1).put("os-thm-version", "2");
-                data.edit().putString("griddata", new Gson().toJson(theme_map)).commit();
-            }
         }
         if (data.getString("playlist", "").equals("")) {
             data.edit().putString("playlist", "[]").commit();
@@ -760,19 +659,6 @@ public class MainActivity extends AppCompatActivity {
         }
         if (!data.getString("themesactive", "").equals("")) {
             data.edit().remove("themesactive").commit();
-        }
-        if (data.getString("themesjson", "").equals("")) {
-            data.edit().putString("themesjson", "[{\"colorPrimary\":\"#2196F3\",\"colorPrimaryDark\":\"#1769AA\",\"colorBackgroundText\":\"#000000\",\"colorBackground\":\"#FFFFFF\",\"colorButton\":\"#F50057\",\"shadow\":\"1\",\"colorHint\":\"#A8A8A8\",\"colorRipple\":\"#40000000\",\"colorPrimaryCardImage\":\"#000000\",\"version\":\"2\",\"colorPrimaryText\":\"#FFFFFF\",\"colorPrimaryImage\":\"#FFFFFF\",\"colorBackgroundImage\":\"#2196F3\",\"colorBackgroundCardText\":\"#000000\",\"statusbarIcon\":\"1\",\"colorBackgroundCard\":\"#FFFFFF\",\"colorButtonText\":\"#FFFFFF\",\"colorPrimaryCardText\":\"#000000\",\"colorPrimaryCard\":\"#FFFFFF\",\"colorBackgroundCardImage\":\"#000000\"}]").commit();
-        } else {
-            tmpMap = new Gson().fromJson(data.getString("themesjson", ""), new TypeToken<ArrayList<HashMap<String, Object>>>() {
-            }.getType());
-            if (tmpMap.get(0).containsKey("version")) {
-                if (!tmpMap.get(0).get("version").toString().equals("2")) {
-                    data.edit().putString("themesjson", "[{\"colorPrimary\":\"#2196F3\",\"colorPrimaryDark\":\"#1769AA\",\"colorBackgroundText\":\"#000000\",\"colorBackground\":\"#FFFFFF\",\"colorButton\":\"#F50057\",\"shadow\":\"1\",\"colorHint\":\"#A8A8A8\",\"colorRipple\":\"#40000000\",\"colorPrimaryCardImage\":\"#000000\",\"version\":\"2\",\"colorPrimaryText\":\"#FFFFFF\",\"colorPrimaryImage\":\"#FFFFFF\",\"colorBackgroundImage\":\"#2196F3\",\"colorBackgroundCardText\":\"#000000\",\"statusbarIcon\":\"1\",\"colorBackgroundCard\":\"#FFFFFF\",\"colorButtonText\":\"#FFFFFF\",\"colorPrimaryCardText\":\"#000000\",\"colorPrimaryCard\":\"#FFFFFF\",\"colorBackgroundCardImage\":\"#000000\"}]").commit();
-                }
-            } else {
-                data.edit().putString("themesjson", "[{\"colorPrimary\":\"#2196F3\",\"colorPrimaryDark\":\"#1769AA\",\"colorBackgroundText\":\"#000000\",\"colorBackground\":\"#FFFFFF\",\"colorButton\":\"#F50057\",\"shadow\":\"1\",\"colorHint\":\"#A8A8A8\",\"colorRipple\":\"#40000000\",\"colorPrimaryCardImage\":\"#000000\",\"version\":\"2\",\"colorPrimaryText\":\"#FFFFFF\",\"colorPrimaryImage\":\"#FFFFFF\",\"colorBackgroundImage\":\"#2196F3\",\"colorBackgroundCardText\":\"#000000\",\"statusbarIcon\":\"1\",\"colorBackgroundCard\":\"#FFFFFF\",\"colorButtonText\":\"#FFFFFF\",\"colorPrimaryCardText\":\"#000000\",\"colorPrimaryCard\":\"#FFFFFF\",\"colorBackgroundCardImage\":\"#000000\"}]").commit();
-            }
         }
         if (data.getString("cookies", "").equals("0")) {
             textview11.setVisibility(View.VISIBLE);
@@ -845,11 +731,8 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
     }
 
     private void _customNav(final String _color) {
-        //Code From StackOverFlow.com And Converted By TeamWorks DEV
-        if (Build.VERSION.SDK_INT >= 21) {
-            Window w = this.getWindow();
-            w.setNavigationBarColor(Color.parseColor(_color));
-        }
+        Window w = this.getWindow();
+        w.setNavigationBarColor(Color.parseColor(_color));
     }
 
 
@@ -857,9 +740,9 @@ Glide.with(getApplicationContext()).load(Uri.parse("'-'")).into(image_user);
         // Create the Snackbar
         ViewGroup containerLayout = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
 
-        com.google.android.material.snackbar.Snackbar snackbar = com.google.android.material.snackbar.Snackbar.make(containerLayout, "", com.google.android.material.snackbar.Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(containerLayout, "", Snackbar.LENGTH_LONG);
         // Get the Snackbar's layout view
-        com.google.android.material.snackbar.Snackbar.SnackbarLayout layout = (com.google.android.material.snackbar.Snackbar.SnackbarLayout) snackbar.getView();
+        Snackbar.SnackbarLayout layout = (Snackbar.SnackbarLayout) snackbar.getView();
         // Inflate our custom view
         View snackview = getLayoutInflater().inflate(R.layout.custom_snack, null);
         // Configure the view

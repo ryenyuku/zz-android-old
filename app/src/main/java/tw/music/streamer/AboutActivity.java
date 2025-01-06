@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -33,8 +30,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -994,8 +989,6 @@ public class AboutActivity extends AppCompatActivity {
     private void initializeLogic() {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         linear34.setVisibility(View.GONE);
-        _setFont();
-        _loadTheme();
         try {
             android.content.pm.PackageInfo packageInfo = AboutActivity.this.getPackageManager().getPackageInfo(getPackageName(), 0);
 
@@ -1091,119 +1084,6 @@ Glide.with(getApplicationContext()).load(Uri.parse("lol")).into(imageview1);
         }
     }
 
-    private void _loadTheme() {
-        theme_map = new Gson().fromJson(data.getString("themesjson", ""), new TypeToken<ArrayList<HashMap<String, Object>>>() {
-        }.getType());
-        _customNav(theme_map.get(0).get("colorBackground").toString());
-        _circleRipple(theme_map.get(0).get("colorRipple").toString(), imageview1);
-        _rippleEffect(linear5, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear6, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear7, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear9, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear26, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear12, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear14, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear16, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear18, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear20, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear22, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear28, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear30, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear32, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear34, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear36, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear38, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear40, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear42, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear44, theme_map.get(0).get("colorRipple").toString());
-        _rippleEffect(linear46, theme_map.get(0).get("colorRipple").toString());
-        linear1.setBackgroundColor(Color.parseColor(theme_map.get(0).get("colorPrimary").toString()));
-        vscroll1.setBackgroundColor(Color.parseColor(theme_map.get(0).get("colorBackground").toString()));
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-            Window w = this.getWindow();
-            w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            w.setStatusBarColor(Color.parseColor(theme_map.get(0).get("colorPrimaryDark").toString()));
-        }
-        textview1.setTextColor(Color.parseColor(theme_map.get(0).get("colorPrimaryText").toString()));
-        _shape(SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), theme_map.get(0).get("colorBackgroundCard").toString(), "#FFFFFF", 0, linear3);
-        _shape(SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), theme_map.get(0).get("colorBackgroundCard").toString(), "#FFFFFF", 0, linear11);
-        _shape(SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), SketchwareUtil.getDip(getApplicationContext(), (int) (2.5d)), theme_map.get(0).get("colorBackgroundCard").toString(), "#FFFFFF", 0, linear24);
-        imageview3.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview4.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview5.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview6.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview7.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview8.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview9.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview10.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview11.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview13.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview14.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview15.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview16.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview17.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview18.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview19.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview20.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview21.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        imageview22.setColorFilter(Color.parseColor(theme_map.get(0).get("colorBackgroundCardImage").toString()), PorterDuff.Mode.MULTIPLY);
-        textview11.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview2.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview3.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview5.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview12.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview25.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview7.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview14.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview15.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview17.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview20.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview21.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview23.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview9.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview27.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview29.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview31.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview33.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview35.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview37.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview24.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview4.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview6.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview26.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview13.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview16.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview18.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview19.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview22.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview8.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview28.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview30.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview32.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview34.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview36.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview38.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview39.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview40.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview41.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview42.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview43.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview44.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview45.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        textview46.setTextColor(Color.parseColor(theme_map.get(0).get("colorBackgroundCardText").toString()));
-        if (theme_map.get(0).get("shadow").toString().equals("1")) {
-            _shadow(linear1, 10);
-            _shadow(linear3, 8);
-            _shadow(linear11, 8);
-            _shadow(linear24, 8);
-        }
-        if (theme_map.get(0).get("statusbarIcon").toString().equals("0")) {
-            _BlackStatusBarIcons();
-        }
-        imageview1.setColorFilter(Color.parseColor(theme_map.get(0).get("colorPrimaryImage").toString()), PorterDuff.Mode.MULTIPLY);
-    }
-
     private void _BlackStatusBarIcons() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -1231,54 +1111,6 @@ Glide.with(getApplicationContext()).load(Uri.parse("lol")).into(imageview1);
         s.setColor(Color.parseColor(_BGcolor));
         s.setStroke(sw.intValue(), Color.parseColor(_Scolor));
         _view.setBackground(s);
-    }
-
-    private void _setFont() {
-        textview1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesansbold.ttf"), 0);
-        textview3.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview4.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview5.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview6.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview7.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview8.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview9.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview11.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview12.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview13.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview14.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview15.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview16.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview17.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview18.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview19.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview20.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview21.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview22.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview23.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview24.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview25.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview26.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview27.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview28.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview29.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview30.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview31.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview32.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview33.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview34.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview35.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview36.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview37.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview38.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview39.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview40.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview41.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview42.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview43.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview44.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview45.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
-        textview46.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/googlesans.ttf"), 0);
     }
 
     @Deprecated
